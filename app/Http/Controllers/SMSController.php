@@ -43,6 +43,6 @@ class SMSController extends Controller
         // Send the message
         $messageClient->sendMessages([$sendMessageRequest]);
         
-        return back()->with('status', 'Succesfully send a message.');
+        return back()->with('success', 'Succesfully send a message.');
     }
 }
