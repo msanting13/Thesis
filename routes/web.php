@@ -53,6 +53,10 @@ Route::group(['middleware' => 'auth:admin'], function(){
         Route::delete('/examinee/delete/{id}','ExamineeController@deleteExaminee')->name('delete.examinee');
 
         Route::resource('/settings/school-year','SchoolYearController');
+
+        // Send text message
+        Route::get('/message/send' , 'SMSController@sendForm');
+        Route::post('/message/send' , 'SMSController@send');
     });
 });
 
