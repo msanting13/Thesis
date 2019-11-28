@@ -61,3 +61,6 @@ Route::group(['middleware' => 'auth:admin'], function(){
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/sample' , function () {
+    dd('This is a test');
+});
