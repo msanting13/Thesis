@@ -49,22 +49,33 @@
 									<h4 class="modal-title">Open School-Year</h4>
 								</div>
 								<div class="modal-body">
-									<form action="" method="POST" role="form" id="openSchoolYear">
+									<form method="POST" role="form" id="openSchoolYear">
 										@csrf
 										<div class="form-group">
-											<label for="school-year">School-Year*</label>
-											<select id="school-year" class="form-control">
-												<option>2020-2021 / 1st Semester</option>
-												<option>2020-2021 / 2nd Semester</option>
+											<label for="school-year">School-Year *</label>
+											@php
+												$currentYear = date('Y');
+												$nextYear = ($currentYear+1);
+												$currentSchoolYear = $currentYear.'-'.$nextYear;
+												$nextSchoolYear = $nextYear.'-'.($nextYear+1);
+											@endphp
+											<select id="selectschoolyear" class="form-control">
+												<optgroup label="Current School Year">
+													<option>{{ $currentSchoolYear.'/1st Semester' }}</option>
+													<option>{{ $currentSchoolYear.'/2nd Semester' }}</option>
+												</optgroup>
+												<optgroup label="Next School Year">
+													<option>{{ $nextSchoolYear.'/1st Semester' }}</option>
+													<option>{{ $nextSchoolYear.'/2nd Semester' }}</option>
+												</optgroup>
 											</select>
 										</div>
 										<div class="form-group">
-											<label>Password*</label>
+											<label>Password *</label>
 											<input type="password" class="form-control" name="password" id="adminPassword" required>
-											<span style="color: red;"><small><strong>!</strong> Please type your password to open school-year.</small></span>
 										</div>
 										<div class="form-group">
-											<button type="submit" class="btn waves-effect waves-light btn-rounded btn-outline-primary">Open</button>
+											<button type="submit" class="btn waves-effect waves-light btn-rounded btn-outline-primary" id="openSchooYear-btn">Open</button>
 										</div>
 									</form>
 								</div>
@@ -77,43 +88,44 @@
 		</div>
 	</div>
 	@section('ajax')
-		<script>
-$(document).ready(function () {
-  $.ajaxSetup({
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-  });   
+	<script>
+	$(document).ready(function () {
+  		$.ajaxSetup({
+    		headers: {
+      			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    		}
+  		});   
 
-$('#openSchoolYear').submit(function(e){
-e.preventDefault();
-let form = $('#openSchoolYear');
-let pwd = $('#adminPassword').val();
-
-$.ajax({
-url:'{{ action('SchoolYearController@store') }}',
-type:"POST",
-dataType:"json",
-data:{password:pwd},
-success:function(data){
-   if (data.message == false) {
-        swal({
-            title: "Invalid Password!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true
-        });
-   }
-   else
-   {
-		form.submit();
-   }
-}
-});
-});
-
-
-}); 
-		</script>
+		$('#openSchoolYear').on('submit',function(e){
+			e.preventDefault();
+			let form = $(this).parents('form');
+			let pwd = $('#adminPassword').val();
+			let sy = $('#selectschoolyear').val();
+			let dataString = 'password='+ pwd + '&schoolyear='+ sy;
+			$.ajax({
+				url:'{{ action('SchoolYearController@store') }}',
+				type:"POST",
+				dataType:"json",
+				data: dataString,
+				success:function(data){
+   					if (data.message==true) {
+						swal({
+						  title: "Success!",
+						  text: "School-Year "+data.schoolyear+" was officially open",
+						  icon: "success",
+						});
+						pwd.val('');
+   					}
+   					else{
+			        	swal({
+			            	title: "Invalid Password!",
+			            	icon: "warning",
+			        	});
+   					}
+				}
+			});
+		});
+	}); 
+	</script>
 	@endsection
 @endsection

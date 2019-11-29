@@ -11,7 +11,18 @@
 |
 */
 Route::get('/my/blog', function () {
-   return "hello";
+
+$nextYear = (date('Y')+1);
+echo date('Y').'-'.$nextYear;
+echo $nextYear.'-'.($nextYear+1);
+
+// if(intval(substr($datestr,4,2)) < 8)
+// {
+//      $ayear = ($year - 1).'/'.$year;
+// }
+// else{
+//     $ayear = ($year).'/'.($year + 1);
+// }
 });
 
 Auth::routes();

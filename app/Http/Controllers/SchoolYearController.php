@@ -38,12 +38,15 @@ class SchoolYearController extends Controller
     public function store(Request $request)
     {
         $email = Auth::user()->email;
-        $inputPassword = $request->password;
         if (Auth::guard('admin')->once(['email' => $email, 'password' => $request->password])) 
         {
-
-            
-
+            SchoolYear::create([
+                'school_year'   =>  $request->schoolyear
+            ]);
+            return response()->json([
+                'message'       =>  true,
+                'schoolyear'    =>  $request->schoolyear  
+            ]);   
         }
         else
         {

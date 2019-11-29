@@ -2,6 +2,8 @@
     <!-- Bootstrap tether Core JavaScript -->
     <script src="/assets/plugins/bootstrap/js/tether.min.js"></script>
     <script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
     <!--Ckeditor-->
     <script src="/assets/plugins/ckeditor/ckeditor.js"></script>
     <script src="/assets/plugins/ckeditor/custom/config.js"></script>
