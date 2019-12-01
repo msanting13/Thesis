@@ -22,6 +22,12 @@
                                     </a>    
                                     <a href="{{ route('examinee') }}">
                                         Examinee
+                                    </a>    
+                                    <a href="{{ action('DepartmentsController@index') }}">
+                                        Departments
+                                    </a>
+                                    <a href="{{ action('CoursesController@index') }}">
+                                        Courses
                                     </a>      
                                 </li>
                             </ul>
@@ -36,7 +42,7 @@
                             </a>
                             <ul aria-expanded="false" class="collapse">
                                 <li>
-                                    <a href="{{ route('category') }}">
+                                    <a href="#">
                                         Account Setting
                                     </a>    
                                     <a href="{{ url('/admin/settings/school-year') }}" class="@yield('status')">

@@ -10,6 +10,6 @@
 		<textarea  class="form-control" id="categoryDescription" name="description" placeholder="Short description">{{ $category->description }}</textarea>
 	</div>
 	<div class="form-group">
-		<button type="submit" class="btn waves-effect waves-light btn-rounded btn-outline-primary">Save</button>
+		<button type="submit" class="btn waves-effect waves-light btn-rounded btn-outline-primary">Update</button>
 	</div>
 </form>

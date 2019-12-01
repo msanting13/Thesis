@@ -1,5 +1,8 @@
 <form action="{{ route('delete.examinee',$id) }}" method="POST">
 	@csrf
+	<a class="btn btn-circle btn-outline-info btn-sm" href="{{ route('examinee.profile',$id) }}">
+		<i class="fa fa-user"></i>
+	</a>	
 	<a class="btn btn-circle btn-outline-primary btn-sm edit-examinee" href="javascript:void(0)" data-toggle="modal" data-target="#modal-id-crud" data-id="{{ $id }}" data-backdrop="static">
 		<i class="mdi mdi-pencil"></i>
 	</a>

@@ -28,17 +28,12 @@
 			<div class="card">
 				<div class="card-block">
 					<div class="table-responsive">
-						<table class="table table-condensed table-hover table-bordered table-striped stylish-table" id="examinee" style="font-size: 14px;">
+						<table class="table table-condensed table-hover table-striped stylish-table" id="examinee" style="font-size: 16px;">
 							<thead>
 								<tr>
 									<th>ID #</th>
 									<th>Examinee #</th>
 									<th>Name</th>
-									<th>Address</th>
-									<th>Date of Birth</th>
-									<th>Gender</th>
-									<th>Cellphone Number</th>
-									<th>Email</th>
 									<th>Date Registered</th>
 									<th>Action</th>
 								</tr>
@@ -59,7 +54,12 @@
 									<form action="{{ route('post.examinee') }}" method="POST" role="form">
 										@csrf
 										<div class="row">
-											<div class="col-md-6" style="border-right: 1px solid#ccc; max-height: 380px; overflow: auto;">
+											<div class="col-md-6" style="border-right: 1px solid#ccc; max-height: 500px; overflow: auto;">
+												<h3>School Year</h3>
+												<div class="form-group">
+													<input type="text" class="form-control" name="schooyear" value="@isset($activeSchoolYear[0]->school_year) {{ $activeSchoolYear[0]->school_year }} @endisset" disabled>
+													<input type="hidden" name="syID" value="@isset($activeSchoolYear[0]->id) {{ $activeSchoolYear[0]->id }} @endisset">
+												</div>
 												<h3>Personal Info</h3>
 												<div class="form-group">
 													<label for="name">Fullname: *</label>
@@ -79,7 +79,7 @@
 													<input id="date1" type="date" class="form-control @error('datebirth') is-invalid @enderror" name="birthdate" required autocomplete="birthdate" autofocus>
 												</div>
 												<div class="form-group">
-													<label for="gender">Gender</label>
+													<label for="gender">Gender *</label>
 													<select id="gender" class="form-control" name="gender" required autocomplete="gender" autofocus>
 														<option></option>
 														<option value="Male">Male</option>
@@ -87,15 +87,29 @@
 													</select>
 												</div>
 												<div class="form-group">
-													<label for="cellnumber">Cellphone number</label>
+													<label for="cellnumber">Cellphone number *</label>
 													<input id="cellnumber" type="text" class="form-control @error('cellnumber') is-invalid @enderror" name="cellnumber" value="{{ old('cellnumber') }}" required autocomplete="cellnumber" autofocus>
-												</div>
-												<div class="form-group">
-													<label for="course">Prefered Course: *</label>
-													<input type="text" class="form-control" id="course" name="course">
 												</div>
 											</div>
 											<div class="col-md-6">
+												<h3>Preferred courses</h3>
+												<div class="form-group">
+													<label>First</label>
+													<select class="form-control" name="first_preferred">
+														@foreach($courses as $course)
+															<option value="{{ $course->id }}">{{ $course->course_code }}</option>
+														@endforeach
+													</select>
+												</div>
+												<div class="form-group">
+													<label>Second</label>
+													<select class="form-control" name="second_preferred">
+														@foreach($courses as $course)
+															<option value="{{ $course->id }}">{{ $course->course_code }}</option>
+														@endforeach
+													</select>
+												</div>
+												<hr>
 												<h3>Account</h3>
 												<div class="form-group">
 													<label for="email">Email: *</label>
@@ -128,7 +142,7 @@
 	    $(document).ready(function () {
 	        $('#examinee').DataTable({
 	        	"columnDefs": [{ 
-	        		"orderable": false, "targets": [2,8]
+	        		"orderable": false, "targets": [0,4]
 	        	}],
 	            "processing": true,
 	            "serverSide": true,
@@ -141,11 +155,11 @@
 	                { "data": "id" },
 	                { "data": "examinee_number" },
 	                { "data": "name" },
-	                { "data": "address" },
-	                { "data": "birth_date" },
-	                { "data": "gender" },
-	                { "data": "cellnumber" },
-	                { "data": "email" },
+	                // { "data": "address" },
+	                // { "data": "birth_date" },
+	                // { "data": "gender" },
+	                // { "data": "cellnumber" },
+	                // { "data": "email" },
 	                { "data": "created_at" },
 	                { "data": "action" },
 	            ]	 

@@ -17,7 +17,7 @@ class User extends Authenticatable
      */
     protected $table = 'tbl_examinees';
     protected $fillable = [
-        'examinee_number', 'name', 'address', 'birth_date', 'gender', 'cellnumber', 'email', 'password',
+        'examinee_number', 'name', 'address', 'birth_date', 'gender', 'cellnumber', 'email', 'password','school_year_id',
     ];
 
     /**
@@ -37,6 +37,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function schoolYear()
+    {
+        return $this->belongsTo('App\SchoolYear','school_year_id');
+    }
+
+    public function preferredCourses()
+    {
+        return $this->hasOne('App\PreferredCourse','examinee_id');
+    }
 
     public static function boot()
     {

@@ -21,9 +21,14 @@ class ExamineeController extends Controller
                 return view('admin.crud.examinee-btn', compact('id','name'));
             })->make(true);
 	}
+	public function examineeProfile($id)
+	{
+		$examinee = User::with('preferredCourses')->find($id);
+		return view('admin.examinee-profile', compact('examinee'));
+	}
 	public function postExaminee(Request $request)
 	{
-		User::create([
+		$user = User::create([
 			'name'				=>	$request->name,
 			'address'			=>	$request->address,
 			'birth_date'		=>	$request->birthdate,
@@ -31,13 +36,21 @@ class ExamineeController extends Controller
 			'cellnumber'		=>	$request->cellnumber,
 			'email'				=>	$request->email,
 			'password'			=>	Hash::make($request->password),
+			'school_year_id'	=>	$request->syID,
 		]);
+
+		$user->preferredCourses()->create([
+			'first_preferred_course'	=>		$request->first_preferred,
+			'second_preferred_course'	=>		$request->second_preferred
+		]);
+
+
 		return redirect()->back();
 	}
 	public function editExaminee(Request $request)
 	{
 		$id = $request->id;
-		$examinee = User::find($id);
+		$examinee = User::with('preferredCourses')->find($id);
 		return view('admin.crud.edit-examinee', compact('examinee','id'));
 	}
 	public function updateExaminee(Request $request, $id)
@@ -51,11 +64,15 @@ class ExamineeController extends Controller
 			'cellnumber'		=>	$request->cellnumber,
 			'email'				=>	$request->email
 		]);
+		$examinee->preferredCourses->update([
+			'first_preferred_course'	=>		$request->first_preferred,
+			'second_preferred_course'	=>		$request->second_preferred
+		]);
 		return redirect()->back();
 	}
 	public function deleteExaminee($id)
 	{
-		$examinee = find($id);
+		$examinee = User::find($id);
 		$examinee->delete();
 		return redirect()->back();
 	}

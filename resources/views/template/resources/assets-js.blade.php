@@ -23,6 +23,7 @@
     <!--DataTables-->
     <script src="/assets/plugins/datatables/js/jquery.dataTables.min.js"></script>
     <script src="/assets/plugins/datatables/js/dataTables.responsive.min.js"></script>
+{{--     <script src="/assets/plugins/datatables/js/jquery.dataTables.js"></script> --}}
     <!-- start - This is for export functionality only -->
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>

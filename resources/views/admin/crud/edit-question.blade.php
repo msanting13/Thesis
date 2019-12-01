@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary">Update</button>
         </div>
 </form>
 <script type="text/javascript">

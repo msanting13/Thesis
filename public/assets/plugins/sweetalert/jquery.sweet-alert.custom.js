@@ -8,7 +8,7 @@ $(document).ready(function () {
             title: "Are you sure you want to delete?",
             text: title,
             icon: "warning",
-            buttons: false,
+            buttons: true,
         })
         .then((isConfirm) => {
             if (isConfirm) {

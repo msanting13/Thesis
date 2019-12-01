@@ -11,18 +11,7 @@
 |
 */
 Route::get('/my/blog', function () {
-
-$nextYear = (date('Y')+1);
-echo date('Y').'-'.$nextYear;
-echo $nextYear.'-'.($nextYear+1);
-
-// if(intval(substr($datestr,4,2)) < 8)
-// {
-//      $ayear = ($year - 1).'/'.$year;
-// }
-// else{
-//     $ayear = ($year).'/'.($year + 1);
-// }
+    return view('layout.examinee-layout-master');
 });
 
 Auth::routes();
@@ -62,8 +51,15 @@ Route::group(['middleware' => 'auth:admin'], function(){
         Route::get('/examinee/edit','ExamineeController@editExaminee')->name('edit.examinee');
         Route::patch('/examinee/update/{id}','ExamineeController@updateExaminee')->name('update.examinee');
         Route::delete('/examinee/delete/{id}','ExamineeController@deleteExaminee')->name('delete.examinee');
+        Route::get('/examinee/profile/{id}','ExamineeController@examineeProfile')->name('examinee.profile');
+
+        Route::resource('/manage/departments','DepartmentsController');
+        Route::resource('/manage/courses','CoursesController');
+        Route::post('/manage/courses/data','CoursesController@coursesData')->name('course.data');
 
         Route::resource('/settings/school-year','SchoolYearController');
+        Route::post('/settings/school-year/close/{school_year}','SchoolYearController@schoolyearClose')->name('schoolyear.close');
+        Route::post('/settings/school-year/data','SchoolYearController@schoolyearData')->name('schoolyear.data');
 
         // Send text message
         Route::get('/message/send' , 'SMSController@sendForm');
@@ -72,6 +68,3 @@ Route::group(['middleware' => 'auth:admin'], function(){
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/sample' , function () {
-    dd('This is a test');
-});

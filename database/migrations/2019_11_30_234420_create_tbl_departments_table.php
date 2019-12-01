@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTblSchoolYearsTable extends Migration
+class CreateTblDepartmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateTblSchoolYearsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_school_years', function (Blueprint $table) {
+        Schema::create('tbl_departments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('school_year');
-            $table->boolean('is_open')->default(1);
+            $table->string('department_name');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateTblSchoolYearsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_school_years');
+        Schema::dropIfExists('tbl_departments');
     }
 }

@@ -2,7 +2,7 @@
 	@csrf
 	<input name="_method" type="hidden" value="PATCH">
 	<div class="row">
-		<div class="col-md-6" style="border-right: 1px solid#ccc; max-height: 380px; overflow: auto;">
+		<div class="col-md-6" style="border-right: 1px solid#ccc; max-height: 500px; overflow: auto;">
 			<h3>Personal Info</h3>
 			<div class="form-group">
 				<label for="name">Fullname: *</label>
@@ -30,11 +30,31 @@
 				</select>
 			</div>
 			<div class="form-group">
-				<label for="course">Prefered Course: *</label>
-				<input type="text" class="form-control" id="course" name="course">
+				<label for="cellnumber">Cellphone number *</label>
+				<input id="cellnumber" type="text" class="form-control @error('cellnumber') is-invalid @enderror" name="cellnumber" value="{{ $examinee->cellnumber }}" required autocomplete="cellnumber" autofocus>
 			</div>
 		</div>
 		<div class="col-md-6">
+			<h3>Preferred courses</h3>
+			<div class="form-group">
+				<label>First</label>
+				<select class="form-control" name="first_preferred">
+					<option value="{{ $examinee->preferredCourses->first_preferred_course }}">{{ $examinee->preferredCourses->firstPreferredCourse->course_code }}</option>
+					@foreach($courses as $course)
+						<option value="{{ $course->id }}">{{ $course->course_code }}</option>
+					@endforeach
+				</select>
+			</div>
+			<div class="form-group">
+				<label>Second</label>
+				<select class="form-control" name="second_preferred">
+					<option value="{{ $examinee->preferredCourses->second_preferred_course }}">{{ $examinee->preferredCourses->secondPreferredCourse->course_code }}</option>
+					@foreach($courses as $course)
+						<option value="{{ $course->id }}">{{ $course->course_code }}</option>
+					@endforeach
+				</select>
+			</div>
+			<hr>
 			<h3>Account</h3>
 			<div class="form-group">
 				<label for="email">Email: *</label>
