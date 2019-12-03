@@ -20,7 +20,7 @@
                                     @foreach($question->choices as $choice)
                                         <tr>
                                             <th style="width: 2px;">
-                                                <input name="group5" type="radio" id="{{ $question->id }}radio_{{ $choice->key }}" value="{{ $choice->key }}" class="with-gap radio-col-deep-purple">
+                                                <input name="group5" type="radio" id="{{ $question->id }}radio_{{ $choice->key }}" data-id="{{ $question->id }}" data-key="{{$question->answers_key}}" value="{{ $choice->key }}" class="with-gap radio-col-deep-purple">
                                                 <label for="{{ $question->id }}radio_{{ $choice->key }}">{{ $choice->key }}</label>
                                             </th>
                                             <td>

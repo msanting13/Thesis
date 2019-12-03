@@ -17,7 +17,7 @@ class CreateTblQuestionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('content');
             $table->bigInteger('category_id');
-            $table->string('answers_key');
+            $table->string('answers_key', 255);
             $table->timestamps();
         });
     }

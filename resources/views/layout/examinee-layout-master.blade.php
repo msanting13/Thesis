@@ -118,6 +118,41 @@
     <!--Custom JavaScript -->
     <script src="/examinee/js/custom.min.js"></script>
     <script src="/examinee/js/dashboard1.js"></script>
+    <script src="https://unpkg.com/bcryptjs@2.4.3/dist/bcrypt.js"></script>
+    {{-- EXAMINEE ANSWER FUNCTION --}}
+    <script>
+        const bcrypt = dcodeIO.bcrypt;
+        let correct  = 0;
+        let wrong    = 0;
+        
+        let btnSubmitQuestionaire = document.querySelector('#submitQuestionaire');
+
+        const isQuestionChoice = (event) => event.target.nodeName === 'INPUT' && event.target.type == 'radio';
+
+        //
+        document.body.addEventListener('click', (e) => {
+            if (isQuestionChoice(e)) {
+                let questionId = e.target.getAttribute('data-id');
+                let key = e.target.getAttribute('data-key').replace('$2y$', '$2a$');
+                let selectedChoice = e.target.value.toUpperCase();
+                 bcrypt.compare(selectedChoice, key).then( (res) => {
+                    if (res) {
+                        correct++;
+                    } else {
+                        wrong++;
+                    }
+                });
+            }
+        });
+
+        // Examinee submit the questionaire.
+        btnSubmitQuestionaire.addEventListener('click' , () => {
+            alert(`Your Correct : ${correct} & Your Wrong ${wrong}`);
+        });
+    </script>
+
+    
+    {{-- EVENT DISABLE SCRIPT --}}
     <script>
         // Disabled Propagation & Bubble of Element.
         const disabledEvent = (e) => {
@@ -139,7 +174,7 @@
         const disableKey = (keyCodes, event) => { if (keyCodes) disabledEvent(event) };
 
         window.onload = () => {
-                // Disabled Right Click
+               /* // Disabled Right Click
                 disabledRightClick();
 
                 document.addEventListener("keydown", (e) => {
@@ -148,6 +183,12 @@
 
                   // Disable CTRL + O Key
                   disableKey(e.ctrlKey && e.keyCode == 79, e);
+
+                  // Disable CTRL + R Key or Refresh
+                  disableKey(e.ctrlKey && e.keyCode == 82, e);
+
+                  // Disable CTRL + SHIFT + C Key
+                  disableKey(e.ctrlKey && e.keyCode == 67, e);
 
                   // Disable CTRL + SHIFT + I Key
                   disableKey(e.ctrlKey&& e.shiftKey && e.keyCode == 73 , e);
@@ -166,7 +207,7 @@
 
                   // Disable F12 key
                   disableKey(event.keyCode == 123, e);
-                }, false);
+                }, false);*/
           };
     </script>
 </body>
