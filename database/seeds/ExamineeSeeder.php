@@ -13,7 +13,6 @@ class ExamineeSeeder extends Seeder
      */
     public function run()
     {
-    	echo "This is a sample";
         User::create([
         	'name' => 'Christopher P. Vistal',
         	'address' => 'Awasian Tandag City',
