@@ -12,9 +12,9 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/67794854_2178648335729029_448519625085288448_n.png">
     <title>Automated Entrance Examination</title>
     <!-- Custom CSS -->
-    <link href="/examinee/style.css" rel="stylesheet">
+    {{-- <link href="/examinee/style.css" rel="stylesheet"> --}}
     <!-- You can change the theme colors from here -->
-    <link href="/examinee/blue.css" id="theme" rel="stylesheet">
+    {{-- <link href="/examinee/blue.css" id="theme" rel="stylesheet"> --}}
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -98,26 +98,26 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="/assets/plugins/jquery/jquery.min.js"></script>
+    {{-- <script src="/assets/plugins/jquery/jquery.min.js"></script> --}}
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="/assets/plugins/popper/popper.min.js"></script>
-    <script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    {{-- <script src="/assets/plugins/popper/popper.min.js"></script> --}}
+    {{-- <script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script> --}}
     <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="/js/jquery.slimscroll.js"></script>
+    {{-- <script src="/js/jquery.slimscroll.js"></script> --}}
     <!--Wave Effects -->
-    <script src="/js/waves.js"></script>
+    {{-- <script src="/js/waves.js"></script> --}}
     <!--Menu sidebar -->
-    <script src="/examinee/js/sidebarmenu.js"></script>
+    {{-- <script src="/examinee/js/sidebarmenu.js"></script> --}}
 <!--stickey kit -->
-    <script src="/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <script src="/assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+    {{-- <script src="/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script> --}}
+    {{-- <script src="/assets/plugins/sparkline/jquery.sparkline.min.js"></script> --}}
     <!--stickey kit -->
-    <script src="/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <script src="/assets/plugins/sparkline/jquery.sparkline.min.js"></script>
-    <script src="/assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+    {{-- <script src="/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script> --}}
+    {{-- <script src="/assets/plugins/sparkline/jquery.sparkline.min.js"></script> --}}
+    {{-- <script src="/assets/plugins/sparkline/jquery.sparkline.min.js"></script> --}}
     <!--Custom JavaScript -->
-    <script src="/examinee/js/custom.min.js"></script>
-    <script src="/examinee/js/dashboard1.js"></script>
+    {{-- <script src="/examinee/js/custom.min.js"></script> --}}
+    {{-- <script src="/examinee/js/dashboard1.js"></script> --}}
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha256-KsRuvuRtUVvobe66OFtOQfjP8WA2SzYsmm4VPfMnxms=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/bcryptjs@2.4.3/dist/bcrypt.js"></script>
@@ -201,6 +201,14 @@
 
         const disableKey = (keyCodes, event) => { if (keyCodes) disabledEvent(event) };
 
+        // Refresh or exit the page.
+        window.addEventListener("beforeunload", function (e) {
+          var confirmationMessage = "\o/";
+
+          (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+          return confirmationMessage;                            //Webkit, Safari, Chrome
+        });
+
         window.onload = () => {
                 // Disabled Right Click
                 disabledRightClick();
@@ -213,7 +221,7 @@
                   disableKey(e.ctrlKey && e.keyCode == 79, e);
 
                   // Disable CTRL + R Key or Refresh
-                  disableKey(e.ctrlKey && e.keyCode == 82, e);
+                  // disableKey(e.ctrlKey && e.keyCode == 82, e);
 
                   // Disable CTRL + SHIFT + C Key
                   disableKey(e.ctrlKey && e.keyCode == 67, e);
@@ -234,7 +242,7 @@
                   disableKey(e.ctrlKey && e.keyCode == 85, e);
 
                   // Disable F12 key
-                  disableKey(event.keyCode == 123, e);
+                  // disableKey(event.keyCode == 123, e);
                 }, false);
           };
     </script>
