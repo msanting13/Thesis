@@ -3,6 +3,11 @@
     @php
         $i = 1;
     @endphp
+    <div class="card">
+        <div class="card-body">
+            <div><h5 id="noOfQuestions">No. of Questions : {{ $noOfQuestions }}</h5></div>
+        </div>
+    </div>
     @foreach($questions as $question)
         <div class="row" id="{{ uniqid() }}">
             <div class="col-md-12">

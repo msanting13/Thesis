@@ -118,18 +118,33 @@
     <!--Custom JavaScript -->
     <script src="/examinee/js/custom.min.js"></script>
     <script src="/examinee/js/dashboard1.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha256-KsRuvuRtUVvobe66OFtOQfjP8WA2SzYsmm4VPfMnxms=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/bcryptjs@2.4.3/dist/bcrypt.js"></script>
     {{-- EXAMINEE ANSWER FUNCTION --}}
     <script>
         const bcrypt = dcodeIO.bcrypt;
         let correct  = 0;
         let wrong    = 0;
+
         
         let btnSubmitQuestionaire = document.querySelector('#submitQuestionaire');
+        let noOfQuestionsElement = document.querySelector('#noOfQuestions');
 
         const isQuestionChoice = (event) => event.target.nodeName === 'INPUT' && event.target.type == 'radio';
 
-        //
+        const sendSMSmessageToExaminee = (correct, wrong) => {
+            $.ajax({
+                url: '/message/send',
+                type: 'POST',
+                data: {examinee_id : {{Auth::user()->id}} , correct : correct, wrong: wrong},
+                success : function (response) {
+                    console.log(response);
+                }
+            });
+        };
+
+        // When the examinee trigger some click event
         document.body.addEventListener('click', (e) => {
             if (isQuestionChoice(e)) {
                 let questionId = e.target.getAttribute('data-id');
@@ -147,7 +162,20 @@
 
         // Examinee submit the questionaire.
         btnSubmitQuestionaire.addEventListener('click' , () => {
-            alert(`Your Correct : ${correct} & Your Wrong ${wrong}`);
+            let [getNoOfQuestions] =  noOfQuestionsElement.innerHTML.match(/(\d+)/); 
+            let noOfQuestions = getNoOfQuestions;
+            let noOfAnsweredQuestions = correct + wrong;
+            if (noOfQuestions != (noOfAnsweredQuestions)) {
+                swal ('Oops','Please double check all questions maybe you missed some questions.',  'error')
+            } else {
+                swal({
+                  title: 'Result',
+                  icon : 'success',
+                  text : `Correct Answers : ${correct} & Wrong Answers ${wrong}`
+                });
+                // Process of text message.
+                sendSMSmessageToExaminee(correct, wrong);
+            }
         });
     </script>
 
@@ -174,7 +202,7 @@
         const disableKey = (keyCodes, event) => { if (keyCodes) disabledEvent(event) };
 
         window.onload = () => {
-               /* // Disabled Right Click
+                // Disabled Right Click
                 disabledRightClick();
 
                 document.addEventListener("keydown", (e) => {
@@ -207,7 +235,7 @@
 
                   // Disable F12 key
                   disableKey(event.keyCode == 123, e);
-                }, false);*/
+                }, false);
           };
     </script>
 </body>

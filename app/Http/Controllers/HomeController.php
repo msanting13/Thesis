@@ -25,6 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         $questions = Question::get();
-        return view('home', compact('questions'));
+        $noOfQuestions = Question::count();
+        return view('home', compact('questions', 'noOfQuestions'));
     }
 }

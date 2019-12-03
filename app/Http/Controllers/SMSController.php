@@ -7,6 +7,7 @@ use SMSGatewayMe\Client\ApiClient;
 use SMSGatewayMe\Client\Configuration;
 use SMSGatewayMe\Client\Api\MessageApi;
 use SMSGatewayMe\Client\Model\SendMessageRequest;
+use App\User;
 
 class SMSController extends Controller
 {
@@ -27,22 +28,27 @@ class SMSController extends Controller
      */
     public function send(Request $request)
     {
+
         // Configure client
         $config = Configuration::getDefaultConfiguration();
         $config->setApiKey('Authorization', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhZG1pbiIsImlhdCI6MTU3NDg2NzQ2OCwiZXhwIjo0MTAyNDQ0ODAwLCJ1aWQiOjY1MDk1LCJyb2xlcyI6WyJST0xFX1VTRVIiXX0.4mrjxsdz85Ip1mP4rv6XiFnPeC5FZgA3EtI4VTAqsQ4');
         $apiClient = new ApiClient($config);
         $messageClient = new MessageApi($apiClient);
 
+        // Get the phone number of examinee
+        $userPhoneNumber = User::find($request->examinee_id)->cellnumber;
+
+
         // Prepare a message
         $sendMessageRequest = new SendMessageRequest([
-            'phoneNumber' => $request->phone_number,
-            'message' => $request->message,
+            'phoneNumber' => $userPhoneNumber,
+            'message' => 'Message for examinee here.',
             'deviceId' => 114333
         ]);
     
         // Send the message
         $messageClient->sendMessages([$sendMessageRequest]);
-        
-        return back()->with('success', 'Succesfully send a message.');
+
+        return response()->json(['success' => true]);
     }
 }

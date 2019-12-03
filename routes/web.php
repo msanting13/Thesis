@@ -61,10 +61,9 @@ Route::group(['middleware' => 'auth:admin'], function(){
         Route::post('/settings/school-year/close/{school_year}','SchoolYearController@schoolyearClose')->name('schoolyear.close');
         Route::post('/settings/school-year/data','SchoolYearController@schoolyearData')->name('schoolyear.data');
 
-        // Send text message
-        Route::get('/message/send' , 'SMSController@sendForm');
-        Route::post('/message/send' , 'SMSController@send');
+    
     });
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/message/send' , 'SMSController@send');
