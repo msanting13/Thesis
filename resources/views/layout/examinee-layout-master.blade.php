@@ -118,5 +118,56 @@
     <!--Custom JavaScript -->
     <script src="/examinee/js/custom.min.js"></script>
     <script src="/examinee/js/dashboard1.js"></script>
+    <script>
+        // Disabled Propagation & Bubble of Element.
+        const disabledEvent = (e) => {
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            } else if (window.event) {
+                window.event.cancelBubble = true;
+            }
+            e.preventDefault();
+            return false;
+        };
+
+        const disabledRightClick = () => {
+            document.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+            }, false);
+        };
+
+        const disableKey = (keyCodes, event) => { if (keyCodes) disabledEvent(event) };
+
+        window.onload = () => {
+                // Disabled Right Click
+                disabledRightClick();
+
+                document.addEventListener("keydown", (e) => {
+                    // Disable CTRL + SHIFT + O Key or Opening the Bookmarks
+                  disableKey(e.ctrlKey && e.shiftKey && e.keyCode == 79, e);
+
+                  // Disable CTRL + O Key
+                  disableKey(e.ctrlKey && e.keyCode == 79, e);
+
+                  // Disable CTRL + SHIFT + I Key
+                  disableKey(e.ctrlKey&& e.shiftKey && e.keyCode == 73 , e);
+
+                  // Disable CTRL + S key
+                  disableKey(e.ctrlKey && e.keyCode == 83, e);
+
+                  // Disable CTRL + SHIFT + J key
+                  disableKey(e.ctrlKey && e.shiftKey && e.keyCode == 74, e);
+
+                  // Disable CTRL + J key
+                  disableKey(e.ctrlKey && e.keyCode == 74, e);
+
+                  // Disable CTRL + U key
+                  disableKey(e.ctrlKey && e.keyCode == 85, e);
+
+                  // Disable F12 key
+                  disableKey(event.keyCode == 123, e);
+                }, false);
+          };
+    </script>
 </body>
 </html>
