@@ -65,7 +65,7 @@
 							</tbody>
 						</table>
 						<hr>
-						<small class="pull-left">Answer: {{ $question->answers_key }}</small>
+						<small class="pull-left">Answer: {{ $question->answers_key }}{{md5(rand(1,999))}}</small>
 						<small class="pull-right">Category: {{ $question->categories->name }}</small>
 					</div>
 				</div>
