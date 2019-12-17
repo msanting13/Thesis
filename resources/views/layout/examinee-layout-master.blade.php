@@ -127,6 +127,8 @@
         const bcrypt = dcodeIO.bcrypt;
         let correct  = [];
         let wrong    = [];
+        let fillInTheBlankAnswers = [];
+        let submitCount = 0;
 
         Array.prototype.remove = function() {
             var what, a = arguments, L = a.length, ax;
@@ -151,6 +153,8 @@
 
 
         const isQuestionChoice = (event) => event.target.nodeName === 'INPUT' && event.target.type == 'radio';
+        const isQuestionInput = (event) => event.target.nodeName === 'INPUT' && event.target.type == 'text' && event.target.getAttribute('data-type') === 'fillIn';
+        
 
         // Ajax request send message to examinee
         const sendSMSmessageToExaminee = (correct, wrong) => {
@@ -169,7 +173,7 @@
             console.log(e.target);
         });*/
 
-        // When the examinee trigger some click event
+        // Function for checking if answer is correct/wrong in multiple choice
         document.body.addEventListener('click', (e) => {
             if (isQuestionChoice(e)) {
                 let questionId = e.target.getAttribute('data-id');
@@ -194,29 +198,65 @@
                         wrong.push(questionId);
                     }
                 });
+            } 
+        });
 
-                 
+        /* Function for checking answer in "Fill in the blank". */
+        /* Need to Refactor together with Multiple Choice */
+        document.body.addEventListener('focusout', (e) => {
+            if (isQuestionInput(e)) {
+                let questionId = e.target.getAttribute('data-id');
+                let key = e.target.getAttribute('data-key');
+                let answer = e.target.value.toUpperCase();
+                let question = document.querySelector(`#question-text-${questionId}`).innerHTML;
+                if (key.includes(calcMD5(question.substr(0,11).trim()))) {
+                    let md5Index = key.indexOf(calcMD5(question.substr(0,11).trim()));
+                    key = key.slice(0, md5Index);
+                } 
+                let status = '';
+                bcrypt.compare(answer, key.replace('$2y$', '$2a$'))
+                .then((res) => status = res)
+                .then((status) => {
+                    if (status) {
+                        isExamineeAlreadyAnswer(questionId);
+                        isExamineeAlreadyAnswer(questionId);
+                        correct.push(questionId);
+                    } else {
+                        isExamineeAlreadyAnswer(questionId);
+                        isExamineeAlreadyAnswer(questionId);
+                        wrong.push(questionId);
+                    }
+                });
             }
         });
 
 
         // Examinee submit the questionaire.
-        btnSubmitQuestionaire.addEventListener('click' , () => {
-            console.log(correct, wrong);
-            let [getNoOfQuestions] =  noOfQuestionsElement.innerHTML.match(/(\d+)/); 
-            let noOfQuestions = getNoOfQuestions;
-            let noOfAnsweredQuestions = correct.length + wrong.length;
-            if (noOfQuestions != (noOfAnsweredQuestions)) {
-                swal ('Oops','Please double check all questions maybe you missed some questions.',  'error')
-            } else {
-                swal({
-                  title: 'Result',
-                  icon : 'success',
-                  text : `Correct Answers : ${correct.length} & Wrong Answers ${wrong.length}`
-                });
-                // Process of text message.
-                sendSMSmessageToExaminee(correct, wrong);
+        // Having an issue with Input type or in the fill in the blank
+        // So to fix we need to submit the form twice to get the last answer in textbox.
+        btnSubmitQuestionaire.addEventListener('click' , (e) => {
+            if (submitCount == 0) {
+                let ask = alert('Please double check all your answers before hitting the submit button.');
+                submitCount++;
+            } else if(submitCount >= 1) {
+                   let [getNoOfQuestions] =  noOfQuestionsElement.innerHTML.match(/(\d+)/); 
+                    let noOfQuestions = getNoOfQuestions;
+                    let noOfAnsweredQuestions = correct.length + wrong.length;
+                    if (noOfQuestions != (noOfAnsweredQuestions)) {
+                        swal ('Oops','Please double check all questions maybe you missed some questions.',  'error')
+                    } else {
+                        swal({
+                          title: 'Result',
+                          icon : 'success',
+                          text : `Correct Answers : ${correct.length} & Wrong Answers ${wrong.length}`
+                        });
+                        // Process of text message.
+                        sendSMSmessageToExaminee(correct, wrong);
+                    }
             }
+            
+            
+         
         });
     </script>
 

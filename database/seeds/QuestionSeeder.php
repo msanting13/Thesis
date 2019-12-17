@@ -13,7 +13,8 @@ class QuestionSeeder extends Seeder
      */
     public function run()
     {
-        factory(Question::class, 3)->create()->each(function($question) {
+        // For multiple choice type
+        factory(Question::class, 5)->create()->each(function($question) {
             Choice::create([
             	'content' => 'Sample Content',
             	'question_id' => $question->id,
@@ -32,6 +33,29 @@ class QuestionSeeder extends Seeder
             	'key' => 'C',
             ]);
 
+             Choice::create([
+                'content' => 'Sample Content',
+                'question_id' => $question->id,
+                'key' => 'D',
+            ]);
+
+              Choice::create([
+                'content' => 'Sample Content',
+                'question_id' => $question->id,
+                'key' => 'E',
+            ]);
         });
+
+        // For Fill in the blank type
+        // For development I just hard code the category_id
+        // 2 in type_id means "Fill in the blank" visit the database. 
+        foreach(range(1, 5) as $questionNo) {
+            Question::create([
+                'content' => 'Question ' . $questionNo,
+                'answers_key' => 'answer',
+                'category_id' => 1,
+                'type_id'     => 2,
+            ]);
+        }
     }
 }

@@ -25,8 +25,15 @@ class Question extends Model
     {
     	return $this->belongsTo('App\Category','category_id');
     }
+
     public function choices()
     {
     	return $this->hasMany('App\Choice','question_id')->orderBy('key', 'ASC');;
     }
+
+    public function type()
+    {
+        return $this->belongsTo('App\QuestionType', 'type_id');
+    }
+
 }

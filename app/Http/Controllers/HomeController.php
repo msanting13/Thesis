@@ -24,8 +24,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $questions = Question::get();
-        $noOfQuestions = Question::count();
-        return view('home', compact('questions', 'noOfQuestions'));
+        // Questions must be group by type
+        $questions = Question::with(['categories:id,name', 'type:id,code,name'])
+                            ->get()
+                            ->groupBy('type.code');
+
+        // Shuffle each Question group.
+        $multipleChoice = $questions['MC']->shuffle();
+        $fillInTheBlank = $questions['FITB']->shuffle();
+
+        $noOfQuestions  = Question::count();
+
+        return view('home', compact('noOfQuestions', 'multipleChoice', 'fillInTheBlank'));
     }
 }
