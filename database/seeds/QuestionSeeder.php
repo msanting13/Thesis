@@ -13,7 +13,7 @@ class QuestionSeeder extends Seeder
      */
     public function run()
     {
-        factory(Question::class, 5)->create()->each(function($question) {
+        factory(Question::class, 3)->create()->each(function($question) {
             Choice::create([
             	'content' => 'Sample Content',
             	'question_id' => $question->id,
@@ -32,17 +32,6 @@ class QuestionSeeder extends Seeder
             	'key' => 'C',
             ]);
 
-            Choice::create([
-            	'content' => 'Sample Content',
-            	'question_id' => $question->id,
-            	'key' => 'D',
-            ]);
-
-            Choice::create([
-            	'content' => 'Sample Content',
-            	'question_id' => $question->id,
-            	'key' => 'E',
-            ]);
         });
     }
 }

@@ -43,7 +43,7 @@ class SMSController extends Controller
         $sendMessageRequest = new SendMessageRequest([
             'phoneNumber' => $userPhoneNumber,
             'message' => 'Message for examinee here.',
-            'deviceId' => 114333
+            'deviceId' => 114313
         ]);
     
         // Send the message

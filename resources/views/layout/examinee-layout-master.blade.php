@@ -141,6 +141,13 @@
         
         let btnSubmitQuestionaire = document.querySelector('#submitQuestionaire');
         let noOfQuestionsElement = document.querySelector('#noOfQuestions');
+        let isExamineeAlreadyAnswer = (id) => {
+            if (correct.includes(id)) {
+                correct.remove(id);
+            } else if(wrong.includes(id)) {
+                wrong.remove(id);
+            }
+        };
 
 
         const isQuestionChoice = (event) => event.target.nodeName === 'INPUT' && event.target.type == 'radio';
@@ -178,14 +185,12 @@
                 .then((res) => status = res)
                 .then((status) => {
                     if (status) {
-                        if (wrong.includes(questionId)) {
-                            wrong.remove(questionId);
-                        }
+                        isExamineeAlreadyAnswer(questionId);
+                        isExamineeAlreadyAnswer(questionId);
                         correct.push(questionId);
                     } else {
-                        if (correct.includes(questionId)) {
-                            correct.remove(questionId);
-                        }
+                        isExamineeAlreadyAnswer(questionId);
+                        isExamineeAlreadyAnswer(questionId);
                         wrong.push(questionId);
                     }
                 });
@@ -197,6 +202,7 @@
 
         // Examinee submit the questionaire.
         btnSubmitQuestionaire.addEventListener('click' , () => {
+            console.log(correct, wrong);
             let [getNoOfQuestions] =  noOfQuestionsElement.innerHTML.match(/(\d+)/); 
             let noOfQuestions = getNoOfQuestions;
             let noOfAnsweredQuestions = correct.length + wrong.length;
