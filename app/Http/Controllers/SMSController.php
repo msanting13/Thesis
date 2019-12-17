@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use SMSGatewayMe\Client\ApiClient;
-use SMSGatewayMe\Client\Configuration;
-use SMSGatewayMe\Client\Api\MessageApi;
-use SMSGatewayMe\Client\Model\SendMessageRequest;
 use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use SMSGatewayMe\Client\ApiClient;
+use SMSGatewayMe\Client\Api\MessageApi;
+use SMSGatewayMe\Client\Configuration;
+use SMSGatewayMe\Client\Model\SendMessageRequest;
 
 class SMSController extends Controller
 {
@@ -38,11 +39,12 @@ class SMSController extends Controller
         // Get the phone number of examinee
         $userPhoneNumber = User::find($request->examinee_id)->cellnumber;
 
+        $appellation = Auth::user()->gender === 'male' ? 'Mr.' : 'Ms.';
 
         // Prepare a message
         $sendMessageRequest = new SendMessageRequest([
             'phoneNumber' => $userPhoneNumber,
-            'message' => 'Message for examinee here.',
+            'message' => "Hello " . $appellation . Auth::user()->name . " here's your score in SDSSU Entrance Examination \nCorrect: ".count($request->correct)."\nWrong: ". count($request->wrong) . "\nPlease don't reply to this message.",
             'deviceId' => 114313
         ]);
     
