@@ -14,12 +14,12 @@ class ExamineeSeeder extends Seeder
     public function run()
     {
         User::create([
-        	'name' => 'Christopher P. Vistal',
-        	'address' => 'Awasian Tandag City',
+        	'name' => 'jhon Doe',
+        	'address' => 'Tandag City',
         	'birth_date' => Carbon::now(),
         	'gender' => 'male',
         	'cellnumber' => '09193693499',
-        	'email' => 'christophervistal26@gmail.com',
+        	'email' => 'doe@gmail.com',
         	'password' => bcrypt(1234),
         	'school_year_id' => 1,
         ]);

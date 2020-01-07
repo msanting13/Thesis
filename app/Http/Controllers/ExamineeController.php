@@ -64,7 +64,7 @@ class ExamineeController extends Controller
 			'cellnumber'		=>	$request->cellnumber,
 			'email'				=>	$request->email
 		]);
-		$examinee->preferredCourses->update([
+		$examinee->preferredCourses->save([
 			'first_preferred_course'	=>		$request->first_preferred,
 			'second_preferred_course'	=>		$request->second_preferred
 		]);

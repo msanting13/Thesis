@@ -37,13 +37,15 @@ class SMSController extends Controller
 
         // Get the phone number of examinee
         $userPhoneNumber = User::find($request->examinee_id)->cellnumber;
+        $message = "You've got: ".$request->correct;
 
 
         // Prepare a message
+        //114333
         $sendMessageRequest = new SendMessageRequest([
             'phoneNumber' => $userPhoneNumber,
-            'message' => 'Message for examinee here.',
-            'deviceId' => 114333
+            'message' => $message,
+            'deviceId' => 114506
         ]);
     
         // Send the message

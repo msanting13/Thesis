@@ -10,8 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/my/blog', function () {
-    return view('layout.examinee-layout-master');
+Route::get('/', function () {
+    return redirect()->route('login');
 });
 
 Auth::routes();
