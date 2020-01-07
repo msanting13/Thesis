@@ -67,3 +67,5 @@ Route::group(['middleware' => 'auth:admin'], function(){
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/message/send' , 'SMSController@send');
+Route::get('logout', 'Auth\LoginController@logout');
+
