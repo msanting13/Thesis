@@ -15,10 +15,10 @@ class CreateTblQuestionsTable extends Migration
     {
         Schema::create('tbl_questions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('content');
+            $table->longtext('content');
             $table->string('answers_key', 255);
             $table->bigInteger('category_id');
-            $table->string('type_id');
+            $table->bigInteger('type_id');
             $table->timestamps();
         });
     }

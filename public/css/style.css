@@ -7982,4 +7982,18 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
     .switch label input[type=checkbox]:checked + .lever.switch-col-white:after {
       background-color: #ffffff; }
 
+/*Custom*/
+.questionDetails{
+  margin: 0px;
+}
+
+/*Fill in the Blank Questionnaire Editor*/
+#questionnaireEditor{
+  width: 100%; 
+  height: 300px; 
+  padding: 10px;
+  border: 1px solid#ccc;
+  border-radius: 5px;
+}
+
       

@@ -29,9 +29,6 @@
                                 </td>
                                 <td>
                                     <textarea class="form-control makeMeRichTextareaEdit" id="{{ uniqid() }}" name="choicesValue[]" placeholder="Choices 1">{{ $choice->content }}</textarea>
-                                    {{-- <input type="text" class="form-control" name="choicesLabel[]" placeholder="Choices 1"> --}}
-                                    {{-- <br><br> --}}
-                                    {{-- <input type="file" class="defaultdropify" name="choicesAttachment[]" data-allowed-file-extensions="jpg png JPEG"> --}}
                                 </td>
                             </tr>
                             @endforeach

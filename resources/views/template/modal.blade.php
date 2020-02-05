@@ -14,3 +14,19 @@
 		</div>
 	</div>
 </div>
+
+<div class="modal fade" id="modal-id-addquestion">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Add Question</h4>
+			</div>
+			<div class="modal-body">
+				@foreach($quesiontypes as $questionType)
+				<a href="{{ route('create.questionnaire', $questionType->id) }}" class="btn btn-primary">{{ $questionType->name }}</a>
+				@endforeach	
+			</div>
+		</div>
+	</div>
+</div>

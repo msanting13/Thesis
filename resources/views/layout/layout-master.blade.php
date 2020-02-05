@@ -13,7 +13,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/67794854_2178648335729029_448519625085288448_n.png">
     <title>@yield('title') | Entrance Examination System </title>
     @include('template.resources.assets-css')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css"> --}}
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">

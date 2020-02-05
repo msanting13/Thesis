@@ -10,6 +10,16 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+use Illuminate\Http\Request;
+
+Route::get('test', function () {
+    return view('sample');
+});
+Route::post('test/post', function (Request $request) {
+    return $request->test2;
+});
+
 Route::get('/', function () {
     return redirect()->route('login');
 });
@@ -36,10 +46,12 @@ Route::group(['middleware' => 'auth:admin'], function(){
 
         //Questionnaire
         Route::get('/manage/questionnaire','QuestionnaireController@index')->name('questionnaire');
+        //Create Questionnaire
+        Route::get('/manage/questionnaire/create/{id}','QuestionnaireController@create')->name('create.questionnaire');
         //Save Questions
-        Route::post('/post/question','QuestionnaireController@postQuestion')->name('post.question');
+        Route::post('/post/question/{type_id}','QuestionnaireController@postQuestion')->name('post.question');
         //Edit Questions
-        Route::get('/question/edit','QuestionnaireController@editQuestion')->name('edit.question');
+        Route::get('/question/{question}/edit','QuestionnaireController@editQuestion')->name('edit.question');
         Route::patch('/question/update/{id}','QuestionnaireController@updateQuestion')->name('update.question');
         //Delete Questions
         Route::delete('/question/delete/{id}','QuestionnaireController@deleteQuestion')->name('delete.question');

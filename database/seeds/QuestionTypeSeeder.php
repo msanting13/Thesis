@@ -12,7 +12,7 @@ class QuestionTypeSeeder extends Seeder
      */
     public function run()
     {
-    	$types = ['Multiple Choice', 'Fill in the blank', 'Essay'];
+    	$types = ['Multiple Choice', 'Fill in the blank', 'Essay', 'Identification'];
     	foreach ($types as $type) {    		
     		QuestionType::create([
                 // Creating abbrevation for type name.

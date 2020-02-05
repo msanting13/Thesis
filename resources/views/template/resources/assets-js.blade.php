@@ -5,7 +5,7 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
     <!--Ckeditor-->
-    <script src="/assets/plugins/ckeditor/ckeditor.js"></script>
+{{--     <script src="/assets/plugins/ckeditor/ckeditor.js" class="ckeEditor"></script> --}}
     <script src="/assets/plugins/ckeditor/custom/config.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="/js/jquery.slimscroll.js"></script>
@@ -32,12 +32,21 @@
     <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/jquery-sortable/Sortable.js"></script>
     <script type="text/javascript">
+        //Sortable
+        let el = document.getElementById('answersKeyFields');
+        let sortable = Sortable.create(el,{
+            animation: 150
+        });
+
+        //DataTables
         $('#categoryTable').DataTable({
             "columnDefs": [{ "orderable": false, "targets": [0,3]}],
             "order": [[2, 'desc']]
         });
     </script>
+    @yield('fillintheblankJS')
     <!--Custom JavaScript -->
     <script src="/js/custom.min.js"></script>
     @yield('ajax')

@@ -32,9 +32,10 @@ class HomeController extends Controller
         // Shuffle each Question group.
         $multipleChoice = $questions['MC']->shuffle();
         $fillInTheBlank = $questions['FITB']->shuffle();
+        $identification = $questions['IDFI']->shuffle();
 
         $noOfQuestions  = Question::count();
 
-        return view('home', compact('noOfQuestions', 'multipleChoice', 'fillInTheBlank'));
+        return view('home', compact('noOfQuestions', 'multipleChoice', 'fillInTheBlank', 'identification'));
     }
 }

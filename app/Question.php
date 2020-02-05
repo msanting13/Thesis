@@ -8,19 +8,18 @@ use Hash;
 class Question extends Model
 {
     protected $table = 'tbl_questions';
-    protected $fillable = ['content','answers_key'];
-
+    protected $fillable = ['content','answers_key','type_id'];
+    //protected $appends = ['answers_key'];
     /**
      * Set the answer key and encrpyt.
      *
      * @param  string  $value
      * @return void
      */
-    public function setAnswersKeyAttribute($value)
+    public function getAnswersKeyHashAttribute()
     {
-        $this->attributes['answers_key'] = Hash::make(strtoupper($value));
+        return Hash::make($this->answers_key);
     }
-
     public function categories()
     {
     	return $this->belongsTo('App\Category','category_id');
@@ -35,5 +34,17 @@ class Question extends Model
     {
         return $this->belongsTo('App\QuestionType', 'type_id');
     }
-
+    public static function boot()
+    {
+        parent::boot();
+        self::creating(function(Question $question) {
+            if ($question->type->code == 'FITB') {
+                $question->answers_key = json_encode($question->answers_key);
+            }
+            else{
+                $question->answers_key = Hash::make(strtoupper($question->answers_key));
+            }
+            return true;
+        });
+    }
 }
