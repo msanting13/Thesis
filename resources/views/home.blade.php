@@ -52,8 +52,8 @@
                     <div class="clearfix"></div>
                     <hr>
                     <h4 class="row">
-                        <div class="col-md-6" id="question-text-{{$question->id}}"> {!! $question->content !!}</div>
-                        <input type="text" id="{{ $question->id }}text_{{ $choice->key }}" data-id="{{ $question->id }}" data-key="{{$question->answers_key}}{{md5(trim(substr($question->content, 0,10)))}}" data-type="fillIn" placeholder="Enter your answer here..." class="with-gap form-control">
+                        <div class="col-md-6" data-key="{{ $question->answers_key }}" data-id="{{$question->id}}" id="question-text-{{$question->id}}"> {!! $question->content !!}</div>
+                        {{-- <input type="text" id="{{ $question->id }}text_{{ $choice->key }}" data-id="{{ $question->id }}" data-key="{{$question->answers_key}}{{md5(trim(substr($question->content, 0,10)))}}" data-type="fillIn" placeholder="Enter your answer here..." class="with-gap form-control"> --}}
                     </h4>
                 </div>
             </div>
@@ -68,10 +68,10 @@
                     <h4>Q{{ $i++ }}</h4>
                     <div class="clearfix"></div>
                     <hr>
-{{--                     <h4 class="row">
+                    <h4 class="row">
                         <div class="col-md-6" id="question-text-{{$question->id}}"> {!! $question->content !!}</div>
-                        <input type="text" id="{{ $question->id }}text_{{ $choice->key }}" data-id="{{ $question->id }}" data-key="{{$question->answers_key}}{{md5(trim(substr($question->content, 0,10)))}}" data-type="fillIn" placeholder="Enter your answer here..." class="with-gap form-control">
-                    </h4> --}}
+                        <input type="text" id="{{ $question->id }}text_{{ $choice->key }}" data-id="{{ $question->id }}" data-key="{{$question->answers_key}}{{md5(trim(substr($question->content, 0,10)))}}" data-type="identification" placeholder="Enter your answer here..." class="with-gap form-control">
+                    </h4>
                 </div>
             </div>
         </div>

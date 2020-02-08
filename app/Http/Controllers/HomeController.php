@@ -28,11 +28,10 @@ class HomeController extends Controller
         $questions = Question::with(['categories:id,name', 'type:id,code,name'])
                             ->get()
                             ->groupBy('type.code');
-
         // Shuffle each Question group.
         $multipleChoice = $questions['MC']->shuffle();
         $fillInTheBlank = $questions['FITB']->shuffle();
-        $identification = $questions['IDFI']->shuffle();
+        $identification = $questions['I']->shuffle();
 
         $noOfQuestions  = Question::count();
 

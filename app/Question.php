@@ -2,8 +2,10 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Http\Repository\EncryptorRepository;
 use Hash;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Request;
 
 class Question extends Model
 {
@@ -34,17 +36,25 @@ class Question extends Model
     {
         return $this->belongsTo('App\QuestionType', 'type_id');
     }
+    
     public static function boot()
     {
         parent::boot();
         self::creating(function(Question $question) {
-            if ($question->type->code == 'FITB') {
-                $question->answers_key = json_encode($question->answers_key);
-            }
-            else{
+            if ($question->type->code == 'FITB' && Request::isMethod('POST')) {
+                $question->answers_key = json_encode(EncryptorRepository::load($question->answers_key));    
+                // $question->answers_key = json_encode($question->answers_key);
+            } else {
                 $question->answers_key = Hash::make(strtoupper($question->answers_key));
             }
             return true;
         });
+
+        self::saving(function (Question $question) {
+            if ($question->type->code == 'FITB' && Request::isMethod('PATCH')) {
+                $question->answers_key = json_encode(EncryptorRepository::load(json_decode($question->answers_key)));
+            }
+        });
+
     }
 }

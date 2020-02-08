@@ -49,13 +49,13 @@ class QuestionSeeder extends Seeder
         // For Fill in the blank type
         // For development I just hard code the category_id
         // 2 in type_id means "Fill in the blank" visit the database. 
-        foreach(range(1, 5) as $questionNo) {
+        /*foreach(range(1, 5) as $questionNo) {
             Question::create([
                 'content' => 'Question ' . $questionNo,
                 'answers_key' => 'answer',
                 'category_id' => 1,
                 'type_id'     => 2,
             ]);
-        }
+        }*/
     }
 }

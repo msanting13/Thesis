@@ -152,8 +152,9 @@
         };
 
 
-        const isQuestionChoice = (event) => event.target.nodeName === 'INPUT' && event.target.type == 'radio';
-        const isQuestionInput = (event) => event.target.nodeName === 'INPUT' && event.target.type == 'text' && event.target.getAttribute('data-type') === 'fillIn';
+        const isMultipleChoice = (event) => event.target.nodeName === 'INPUT' && event.target.type == 'radio';
+        const isFillInTheBlank = (event) => event.target.nodeName === 'INPUT' && event.target.type == 'text' && event.target.getAttribute('data-type') === 'fillIn';
+        const isIdentification = (event) => event.target.nodeName === 'INPUT' && event.target.type == 'text' && event.target.getAttribute('data-type') === 'identification';
         
 
         // Ajax request send message to examinee
@@ -175,7 +176,7 @@
 
         // Function for checking if answer is correct/wrong in multiple choice
         document.body.addEventListener('click', (e) => {
-            if (isQuestionChoice(e)) {
+            if (isMultipleChoice(e)) {
                 let questionId = e.target.getAttribute('data-id');
                 let key = e.target.getAttribute('data-key');
                 let selectedChoice = e.target.value.toUpperCase();
@@ -201,10 +202,9 @@
             } 
         });
 
-        /* Function for checking answer in "Fill in the blank". */
-        /* Need to Refactor together with Multiple Choice */
+        /* Function for checking answer in "Identification". */
         document.body.addEventListener('focusout', (e) => {
-            if (isQuestionInput(e)) {
+            if (isIdentification(e)) {
                 let questionId = e.target.getAttribute('data-id');
                 let key = e.target.getAttribute('data-key');
                 let answer = e.target.value.toUpperCase();
@@ -225,6 +225,71 @@
                         isExamineeAlreadyAnswer(questionId);
                         isExamineeAlreadyAnswer(questionId);
                         wrong.push(questionId);
+                    }
+                });
+            }
+        });
+
+        // This function is for Fill in the blank.
+        let verify = (encodedAnswer, examineeAnswer, questionId) => {
+            let SEPERATOR_CODE = "0x20";
+            // We need to check if the decodedAnswer is only one character or more than
+            if (encodedAnswer.includes(SEPERATOR_CODE)) {
+                // We need to split it by seperator code
+                let splitted = encodedAnswer.split(SEPERATOR_CODE);
+                let decoded = "";
+                splitted.forEach((ascii) => {
+                    decoded += String.fromCharCode(ascii);
+                });
+                // Now let's check the answer of the examinee 
+                if (decoded == examineeAnswer) {
+                    // Count as correct
+                    isExamineeAlreadyAnswer(questionId);
+                    isExamineeAlreadyAnswer(questionId);
+                    correct.push(questionId);
+                } else {
+                    isExamineeAlreadyAnswer(questionId);
+                    isExamineeAlreadyAnswer(questionId);
+                    wrong.push(questionId);
+                }
+            } else { // We just need to decode the ascii value of the encodedAnswer.
+                let decoded = String.fromCharCode(encodedAnswer);
+                // Now let's check the answer of the examinee 
+                if (decoded == examineeAnswer) {
+                    // Count as correct
+                    isExamineeAlreadyAnswer(questionId);
+                    isExamineeAlreadyAnswer(questionId);
+                    correct.push(questionId);
+                } else {
+                    isExamineeAlreadyAnswer(questionId);
+                    isExamineeAlreadyAnswer(questionId);
+                    wrong.push(questionId);
+                }
+            }
+        };
+
+
+        /* Function for checking answer in "Fill in the blank". */
+        document.body.addEventListener('focusout', (e) => {
+            if (isFillInTheBlank(e)) {
+                // Get the parent node or the question container
+                // this will help us to get the answers_key & question_id
+                let parent     = e.target.parentNode;
+                let questionId = parent.getAttribute('data-id');
+                let answerKeys = JSON.parse(parent.getAttribute('data-key'));
+
+                // Get the answer of the user
+                let answer     = e.target.value;
+
+                let position = 0;
+                // Inside of the parent there are so many element we only interested to inputs.
+                parent.childNodes.forEach((element, length) => {
+                    if (element instanceof HTMLInputElement && element.type == 'text') {
+                        if (element == e.target) { // Element inside of parent is equal to examinee selected input
+                            // Verify the answer
+                            verify(answerKeys[position], e.target.value.toLowerCase(), questionId);
+                        }
+                        position++;
                     }
                 });
             }

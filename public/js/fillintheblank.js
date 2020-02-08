@@ -2,16 +2,26 @@ let btnAddBlankField = document.querySelector('#addBlankField-btn');
 let questionnaireEditorElement = document.querySelector('#questionnaireEditor');
 let btnAddAnswersKeyFields = document.querySelector('#addAnswersKeyFields-btn');
 
+
 questionnaireEditorElement.addEventListener("input", syncQuestionnaireEditorContainer);
 btnAddBlankField.addEventListener("click", addBlankField);
 btnAddBlankField.addEventListener("click", syncQuestionnaireEditorContainer);
 btnAddAnswersKeyFields.addEventListener("click", answersKeyFields);
+
+let ID = function () {
+  // Math.random should be unique because of its seeding algorithm.
+  // Convert it to base 36 (numbers + letters), and grab the first 9 characters
+  // after the decimal.
+  return '_' + Math.random().toString(36).substr(2, 9);
+};
 
 function addBlankField() {
     let blankField = document.createElement("input");
     setAttributes(blankField, {
         "type": "text",
         "name": "fillInTheBlankField[]",
+        "id" : `FITB-${ID()}`,
+        "data-type" : "fillIn",
         "class": "fillInTheBlankField form-control col-md-3"
     });
 

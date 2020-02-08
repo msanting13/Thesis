@@ -47,6 +47,7 @@ class QuestionnaireController extends Controller
 
         $questionnaireType = QuestionType::find($type_id);
 
+
         $question = $category->questions()->create([
             'content'       =>  $request->content,
             'answers_key'   =>  $request->answerkey, //(is_array($request->answerkey)) ? json_encode($request->answerkey) : $request->answerkey,

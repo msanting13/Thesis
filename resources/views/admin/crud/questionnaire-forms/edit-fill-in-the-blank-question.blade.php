@@ -1,3 +1,4 @@
+@inject('encryptor', 'App\Http\Repository\EncryptorRepository')
 @extends('layout.layout-master')
 @section('title','Questionnaire')
 @section('breadcrumb')
@@ -70,7 +71,7 @@
                                 <i class="mdi mdi-drag-vertical"></i>
                             </div>
                             <div class="input-group col-md-10">
-                                <input type="text" class="form-control" name="answerkey[]" value="{{ $answer }}" placeholder="Answer here">
+                                <input type="text" class="form-control" name="answerkey[]" value="{{ $encryptor::decrypt($answer) }}" placeholder="Answer here">
                                 <span class="input-group-btn">
                                     <button class="btn btn-danger" type="button" onclick="removeAnswersKeyFields('{{ $uniqueID }}');"> <i class="fa fa-minus"></i>
                                 </button>
