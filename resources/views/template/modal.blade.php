@@ -24,7 +24,7 @@
 			</div>
 			<div class="modal-body">
 				@foreach($quesiontypes as $questionType)
-				<a href="{{ route('create.questionnaire', $questionType->id) }}" class="btn btn-primary">{{ $questionType->name }}</a>
+					<a href="{{ route('create.questionnaire', $questionType->id) }}" class="btn btn-primary">{{ $questionType->name }}</a>
 				@endforeach	
 			</div>
 		</div>

@@ -13,6 +13,7 @@
 		<div class="col-12">
 			<div class="card">
 				<div class="card-block">
+					@include('errors.error')
 					<h3>
 						Add Examinee
 						<a class="btn btn-circle btn-outline-primary btn-sm pull-right" data-toggle="modal" href='#modal-id'>
@@ -63,25 +64,20 @@
 												<h3>Personal Info</h3>
 												<div class="form-group">
 													<label for="name">Fullname: *</label>
-													<input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-					                                @error('name')
-					                                    <span class="invalid-feedback" role="alert">
-					                                        <strong>{{ $message }}</strong>
-					                                    </span>
-					                                @enderror
+													<input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 												</div>
 												<div class="form-group">
 													<label for="address">Address: *</label>
-													<input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="address" autofocus>
+													<input id="address" type="text" class="form-control" name="address" value="{{ old('address') }}" required autocomplete="address" autofocus>
 												</div>
 												<div class="form-group">
 													<label for="date1">Date of Birth: *</label>
-													<input id="date1" type="date" class="form-control @error('datebirth') is-invalid @enderror" name="birthdate" required autocomplete="birthdate" autofocus>
+													<input id="date1" type="date" class="form-control" name="birthdate" value="{{ old('birthdate') }}" required autocomplete="birthdate" autofocus>
 												</div>
 												<div class="form-group">
 													<label for="gender">Gender *</label>
 													<select id="gender" class="form-control" name="gender" required autocomplete="gender" autofocus>
-														<option></option>
+														<option>{{ old('gender') }}</option>
 														<option value="Male">Male</option>
 														<option value="Female">Female</option>
 													</select>
@@ -113,11 +109,11 @@
 												<h3>Account</h3>
 												<div class="form-group">
 													<label for="email">Email: *</label>
-													<input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+													<input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autocomplete="email">
 												</div>
 												<div class="form-group">
 													<label for="password">Password: *</label>
-													<input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="p4ssword" required autocomplete="new-password">
+													<input id="password" type="password" class="form-control" name="password" value="p4ssword" required>
 												</div>
 												<div class="form-group">
 													<button type="submit" class="btn waves-effect waves-light btn-rounded btn-outline-primary">Register</button>

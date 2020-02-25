@@ -37,7 +37,7 @@
 								<i class="mdi mdi-pencil"></i>
 							</a>
 							<input name="_method" type="hidden" value="DELETE">
-							<button type="button" class="btn btn-circle btn-outline-danger btn-sm btn-delete" data-toggle="tooltip" title="Delete" data-textval="{{ $question->name }}">
+							<button type="button" class="btn btn-circle btn-outline-danger btn-sm btn-delete" data-toggle="tooltip" title="Delete" data-textval="{{ $question->content }}">
 								<i class="mdi mdi-delete"></i>
 							</button>
 						</form>
@@ -69,7 +69,7 @@
 							<summary>Details</summary>
 							<p class="questionDetails"><small>Answer: {{ $question->answers_key_hash }}{{md5(rand(1,999))}}</small></p>
 							<p class="questionDetails"><small>Question type: {{ $question->type->name }}</small></p>
-							<p class="questionDetails"><small>Category: {{ $question->categories->name }}</small></p>
+							{{-- <p class="questionDetails"><small>Category: {{ $question->categories->name }}</small></p> --}}
 							<p class="questionDetails"><small>Date created: {{ date('F d, Y h:i:s A, l', strtotime($question->created_at)) }}</small></p>
 							<p class="questionDetails"><small>Last updated: {{ date('F d, Y h:i:s A, l', strtotime($question->updated_at)) }}</small></p>
 						</details>

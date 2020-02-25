@@ -13,6 +13,7 @@
 		<div class="col-12">
 			<div class="card">
 				<div class="card-block">
+					@include('errors.error')
 					<h3>
 						Departments
 						<a class="btn btn-circle btn-outline-primary btn-sm pull-right" data-toggle="modal" href='#modal-id'>
@@ -72,7 +73,7 @@
 										@csrf
 										<div class="form-group">
 											<label for="Name">Department name</label>
-											<input type="text" class="form-control" id="departmentName" name="department_name" placeholder="Department name">
+											<input type="text" class="form-control" id="departmentName" name="department_name" value="{{ old('department_name') }}" placeholder="Department name">
 										</div>
 										<div class="form-group">
 											<button type="submit" class="btn waves-effect waves-light btn-rounded btn-outline-primary">Save</button>

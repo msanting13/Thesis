@@ -36,6 +36,10 @@ class DepartmentsController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate(request(),[
+            'department_name'   =>  'required|alpha|min:2'
+        ]);
+
         Department::create([
             'department_name'   =>  $request->department_name
         ]);
@@ -73,6 +77,10 @@ class DepartmentsController extends Controller
      */
     public function update(Request $request, Department $department)
     {
+        $this->validate(request(),[
+            'department_name'   =>  'required|alpha|min:2'
+        ]);
+
         $department->department_name = $request->department_name;
         $department->save();
         return back();

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
+use App\Http\Requests\CategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -12,14 +13,8 @@ class CategoryController extends Controller
     	$categories = Category::with('questions')->get();
     	return view('admin.category', compact('categories'));
     }
-    public function addCategory(Request $request)
+    public function addCategory(CategoryRequest $request)
     {
-        $this->validate(request(),[
-            'name'                     =>          'unique:tbl_categories',
-        ],[
-            'name.unique'              =>          'Category title is already exist'
-        ]);
-
     	Category::create($request->all());
     	return redirect()->back();
     }
@@ -29,7 +24,7 @@ class CategoryController extends Controller
     	$category = Category::find($id);
     	return view('admin.crud.edit-category', compact('category'));
     }
-    public function updateCategory(Request $request, $id)
+    public function updateCategory(CategoryRequest $request, $id)
     {
 		$category = Category::find($id);
 		$category->update($request->all());

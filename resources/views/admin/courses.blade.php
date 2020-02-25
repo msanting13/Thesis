@@ -13,6 +13,7 @@
 		<div class="col-12">
 			<div class="card">
 				<div class="card-block">
+					@include('errors.error')
 					<h3>
 						Courses
 						<a class="btn btn-circle btn-outline-primary btn-sm pull-right" data-toggle="modal" href='#modal-id'>
@@ -63,11 +64,11 @@
 										</div>
 										<div class="form-group">
 											<label for="courseCode">Course code</label>
-											<input type="text" class="form-control" id="courseCode" name="course_code">
+											<input type="text" class="form-control" id="courseCode" value="{{ old('course_code') }}" name="course_code">
 										</div>
 										<div class="form-group">
 											<label for="courseDescription">Course description</label>
-											<input type="text" class="form-control" id="courseDescription" name="course_descr">
+											<input type="text" class="form-control" id="courseDescription" value="{{ old('course_descr') }}" name="course_descr">
 										</div>
 										<div class="form-group">
 											<button type="submit" class="btn waves-effect waves-light btn-rounded btn-outline-primary">Save</button>

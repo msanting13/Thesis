@@ -4,9 +4,7 @@
     <script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
-    <!--Ckeditor-->
-{{--     <script src="/assets/plugins/ckeditor/ckeditor.js" class="ckeEditor"></script> --}}
-    <script src="/assets/plugins/ckeditor/custom/config.js"></script>
+    @yield('ckeditor')
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="/js/jquery.slimscroll.js"></script>
     <!--Wave Effects -->
@@ -38,12 +36,6 @@
         let el = document.getElementById('answersKeyFields');
         let sortable = Sortable.create(el,{
             animation: 150
-        });
-
-        //DataTables
-        $('#categoryTable').DataTable({
-            "columnDefs": [{ "orderable": false, "targets": [0,3]}],
-            "order": [[2, 'desc']]
         });
     </script>
     @yield('fillintheblankJS')

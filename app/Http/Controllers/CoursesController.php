@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\Http\Requests\CoursesRequest;
 use Illuminate\Http\Request;
 
 class CoursesController extends Controller
@@ -41,7 +42,7 @@ class CoursesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CoursesRequest $request)
     {
         Course::create([
             'course_code'   =>  $request->course_code,
@@ -80,7 +81,7 @@ class CoursesController extends Controller
      * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Course $course)
+    public function update(CoursesRequest $request, Course $course)
     {
         $course->course_code = $request->course_code;
         $course->course_descr = $request->course_descr;

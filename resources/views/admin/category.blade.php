@@ -13,6 +13,7 @@
 		<div class="col-12">
 			<div class="card">
 				<div class="card-block">
+					@include('errors.error')
 					<h3>
 						Category
 						<a class="btn btn-circle btn-outline-primary btn-sm pull-right" data-toggle="modal" href='#modal-id'>
@@ -73,7 +74,7 @@
 										@csrf
 										<div class="form-group">
 											<label for="Name">Name</label>
-											<input type="text" class="form-control" id="categoryName" name="name" placeholder="Category name">
+											<input type="text" class="form-control" id="categoryName" name="name" value="{{ old('name') }}" placeholder="Category name">
 										</div>
 										<div class="form-group">
 											<label for="description">Description</label>

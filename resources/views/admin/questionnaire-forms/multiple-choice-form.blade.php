@@ -55,6 +55,10 @@
 		<button type="submit" class="btn btn-rounded btn-primary">Save</button>
 	</div>
 </form>
+@section('ckeditor')
+<script src="/assets/plugins/ckeditor/ckeditor.js" class="ckeEditor"></script>
+<script src="/assets/plugins/ckeditor/custom/config.js"></script>
+@endsection
 @section('ajax')
 <script type="text/javascript">
 	$('.makeMeRichTextarea').each( function () {

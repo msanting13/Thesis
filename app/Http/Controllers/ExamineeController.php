@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ExamineeRequest;
 use Yajra\DataTables\Facades\Datatables;
 use App\User;
 use Hash;
@@ -26,7 +27,7 @@ class ExamineeController extends Controller
 		$examinee = User::with('preferredCourses')->find($id);
 		return view('admin.examinee-profile', compact('examinee'));
 	}
-	public function postExaminee(Request $request)
+	public function postExaminee(ExamineeRequest $request)
 	{
 		$user = User::create([
 			'name'				=>	$request->name,
@@ -53,7 +54,7 @@ class ExamineeController extends Controller
 		$examinee = User::with('preferredCourses')->find($id);
 		return view('admin.crud.edit-examinee', compact('examinee','id'));
 	}
-	public function updateExaminee(Request $request, $id)
+	public function updateExaminee(ExamineeRequest $request, $id)
 	{
 		$examinee = User::find($id);
 		$examinee->update([
