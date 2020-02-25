@@ -25,7 +25,7 @@ class CoursesRequest extends FormRequest
     {
         return [
             'course_code'   =>  'required|alpha|min:2',
-            'course_descr'   =>  'required|alpha|min:3',
+            'course_descr'   =>  'required|min:3',
             'department'   =>  'required',
         ];
     }
@@ -33,7 +33,6 @@ class CoursesRequest extends FormRequest
     {
         return [
             'course_descr.required'  =>  'The course description field is required.',
-            'course_descr.apha'  =>  'The course description may only contain letters.',
             'course_descr.min'  =>  'The course description must be at least 3 characters.',
         ];
     }
