@@ -37,7 +37,9 @@ class DepartmentsController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(),[
-            'department_name'   =>  'required|alpha|min:2'
+            'department_name'   =>  'required|string|unique:tbl_departments|min:2|regex:/^[A-ZÀÂÇÉÈÊËÎÏÔÛÙÜŸÑÆŒa-zàâçéèêëîïôûùüÿñæœ0-9_.,() ]+$/'
+        ],[
+            'department_name.reqex' => 'The department name field must not contain any special characters',
         ]);
 
         Department::create([

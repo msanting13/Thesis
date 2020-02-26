@@ -29,7 +29,7 @@ class ExamineeRequest extends FormRequest
             'address'       =>          ['required'],
             'gender'        =>          ['required'],
             'birthdate'     =>          ['required','date'],
-            'cellnumber'    =>          ['required',new PhoneNumberRule],
+            'cellnumber'    =>          ['required', new PhoneNumberRule],
             'email'         =>          ['required', 'string', 'email', 'max:255', 'unique:tbl_examinees'],
             'password'      =>          ['required', 'string', 'min:8'],
         ];

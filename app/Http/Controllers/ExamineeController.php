@@ -74,6 +74,7 @@ class ExamineeController extends Controller
 	public function deleteExaminee($id)
 	{
 		$examinee = User::find($id);
+		$examinee->preferredCourses->delete();
 		$examinee->delete();
 		return redirect()->back();
 	}

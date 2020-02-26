@@ -78,7 +78,7 @@ class QuestionnaireController extends Controller
                 return view('admin.crud.questionnaire-forms.edit-multiple-choice-question', compact('question'));
                 break;
             case 'I':
-                return view('admin.questionnaire-forms.identification-form', compact('question'));
+                return view('admin.crud.questionnaire-forms.edit-identification-form', compact('question'));
                 break;
             case 'FITB':
                 $answers = json_decode($question->answers_key);
@@ -94,6 +94,7 @@ class QuestionnaireController extends Controller
         $question = Question::find($id);
         $question->content = $request->content;
         $question->category_id = $request->category;
+        
         if ($request->has('answerkey')) {
             $question->answers_key = (is_array($request->answerkey)) ? json_encode($request->answerkey) : $request->answerkey;
         }

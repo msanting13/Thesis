@@ -24,7 +24,15 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'                     =>          'required|unique:tbl_categories|min:3|alpha',
+            'name'              =>   'required|unique:tbl_categories|min:3|string|regex:/^[A-ZÀÂÇÉÈÊËÎÏÔÛÙÜŸÑÆŒa-zàâçéèêëîïôûùüÿñæœ0-9_.,() ]+$/',
+            'description'       =>   'required|min:3|string|regex:/^[A-ZÀÂÇÉÈÊËÎÏÔÛÙÜŸÑÆŒa-zàâçéèêëîïôûùüÿñæœ0-9_.,() ]+$/',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'name.regex'  =>  'The category name field must not contain any special characters.',
+            'description.regex'  =>  'The category description field must not contain any special characters.',
         ];
     }
 }

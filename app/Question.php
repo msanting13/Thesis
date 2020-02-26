@@ -54,6 +54,9 @@ class Question extends Model
             if ($question->type->code == 'FITB' && Request::isMethod('PATCH')) {
                 $question->answers_key = json_encode(EncryptorRepository::load(json_decode($question->answers_key)));
             }
+            else {
+                $question->answers_key = Hash::make(strtoupper($question->answers_key));
+            }
         });
 
     }

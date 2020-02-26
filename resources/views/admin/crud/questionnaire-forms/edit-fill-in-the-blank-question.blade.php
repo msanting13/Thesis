@@ -7,7 +7,7 @@
         <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
         <li class="breadcrumb-item active">Manage</li>
         <li class="breadcrumb-item active"><a href="{{ route('questionnaire') }}">Questionnaire</a></li>
-        <li class="breadcrumb-item active"><a href="{{-- {{ route('create.questionnaire', $id) }} --}}">Fill in the blank</a></li>
+        <li class="breadcrumb-item active"><a href="#">Fill in the blank</a></li>
     </ol>
 @endsection
 @section('questionnaireTypeMenu')

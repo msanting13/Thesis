@@ -34,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
         //Inject Data on views
         view()->composer([
             'admin.questionnaire-landing',
+            'admin.crud.questionnaire-forms.question-form',
             'admin.questionnaire-forms.question-form',
             'admin.questionnaire-forms.fill-in-the-blank-form',
             'template.modal',
