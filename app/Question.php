@@ -41,7 +41,7 @@ class Question extends Model
     {
         parent::boot();
         self::creating(function(Question $question) {
-            if ($question->type->code == 'FITB' && Request::isMethod('POST')) {
+            if (Request::isMethod('POST') && $question->type->code == 'FITB') {
                 $question->answers_key = json_encode(EncryptorRepository::load($question->answers_key));    
                 // $question->answers_key = json_encode($question->answers_key);
             } else {
@@ -51,12 +51,12 @@ class Question extends Model
         });
 
         self::saving(function (Question $question) {
-            if ($question->type->code == 'FITB' && Request::isMethod('PATCH')) {
+            if (Request::isMethod('PATCH') && $question->type->code == 'FITB') {
                 $question->answers_key = json_encode(EncryptorRepository::load(json_decode($question->answers_key)));
-            }
-            else {
+            } else if (Request::isMethod('PATCH') && $question->type->code != 'FITB') {
                 $question->answers_key = Hash::make(strtoupper($question->answers_key));
             }
+            
         });
 
     }

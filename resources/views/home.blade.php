@@ -60,6 +60,7 @@
         </div>
     </div>
 @endforeach 
+
 @foreach($identification as $question)
      <div class="row" id="{{ uniqid() }}">
         <div class="col-md-12">
