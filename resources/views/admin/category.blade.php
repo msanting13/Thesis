@@ -1,11 +1,11 @@
 @extends('layout.layout-master')
 @section('title','Category')
 @section('breadcrumb')
-	<h3 class="text-themecolor m-b-0 m-t-0">Category</h3>
+	<h3 class="text-themecolor m-b-0 m-t-0">Categories</h3>
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
 		<li class="breadcrumb-item active">Manage</li>
-		<li class="breadcrumb-item active">Category</li>
+		<li class="breadcrumb-item active">Categories</li>
 	</ol>
 @endsection
 @section('content')
@@ -14,8 +14,9 @@
 			<div class="card">
 				<div class="card-block">
 					@include('errors.error')
+					@include('template.success')
 					<h3>
-						Category
+						Categories 
 						<a class="btn btn-circle btn-outline-primary btn-sm pull-right" data-toggle="modal" href='#modal-id'>
 							<i class="fa fa-plus"></i>
 						</a>   

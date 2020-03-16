@@ -7996,4 +7996,7 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
   border-radius: 5px;
 }
 
+.app-header{
+  font-weight: bold;
+}
       

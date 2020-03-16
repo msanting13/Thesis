@@ -49,7 +49,7 @@ class CoursesController extends Controller
             'course_descr'  =>  $request->course_descr,
             'department_id' =>  $request->department
         ]);
-        return back();
+        return back()->with('success','Successfully saved!');
     }
 
     /**
@@ -66,28 +66,28 @@ class CoursesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Course  $course
+     * @param  \App\Course  $program
      * @return \Illuminate\Http\Response
      */
-    public function edit(Course $course)
+    public function edit(Course $program)
     {
-        return view('admin.crud.edit-courses', compact('course'));
+        return view('admin.crud.edit-courses', compact('program'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Course  $course
+     * @param  \App\Course  $program
      * @return \Illuminate\Http\Response
      */
-    public function update(CoursesRequest $request, Course $course)
+    public function update(CoursesRequest $request, Course $program)
     {
-        $course->course_code = $request->course_code;
-        $course->course_descr = $request->course_descr;
-        $course->department_id = $request->department;
-        $course->save();
-        return back();
+        $program->course_code = $request->course_code;
+        $program->course_descr = $request->course_descr;
+        $program->department_id = $request->department;
+        $program->save();
+        return back()->with('success','Successfully updated!');
     }
 
     /**
@@ -96,9 +96,9 @@ class CoursesController extends Controller
      * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Course $course)
+    public function destroy(Course $program)
     {
-        $course->delete();
-        return back();
+        $program->delete();
+        return back()->with('success','Successfully deleted!');
     }
 }

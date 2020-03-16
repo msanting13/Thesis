@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Department;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
 class DepartmentsController extends Controller
@@ -45,16 +46,16 @@ class DepartmentsController extends Controller
         Department::create([
             'department_name'   =>  $request->department_name
         ]);
-        return back();
+        return back()->with('success','Successfully saved!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Department  $department
+     * @param  \App\Department  $college
      * @return \Illuminate\Http\Response
      */
-    public function show(Department $department)
+    public function show(Department $college)
     {
         //
     }
@@ -62,41 +63,41 @@ class DepartmentsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Department  $department
+     * @param  \App\Department  $college
      * @return \Illuminate\Http\Response
      */
-    public function edit(Department $department)
+    public function edit(Department $college)
     {
-        return view('admin.crud.edit-departments', compact('department'));
+        return view('admin.crud.edit-departments', compact('college'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Department  $department
+     * @param  \App\Department  $college
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Department $department)
+    public function update(Request $request, Department $college)
     {
         $this->validate(request(),[
-            'department_name'   =>  'required|alpha|min:2'
+            'department_name'   =>  ['required', 'string', 'min:2,', 'regex:/^[A-ZÀÂÇÉÈÊËÎÏÔÛÙÜŸÑÆŒa-zàâçéèêëîïôûùüÿñæœ0-9_.,() ]+$/', Rule::unique('tbl_departments')->ignore($college->id)]
         ]);
 
-        $department->department_name = $request->department_name;
-        $department->save();
-        return back();
+        $college->department_name = $request->department_name;
+        $college->save();
+        return back()->with('success','Successfully updated!');;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Department  $department
+     * @param  \App\Department  $college
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Department $department)
+    public function destroy(Department $college)
     {
-        $department->delete();
-        return back();
+        $college->delete();
+        return back()->with('success','Successfully deleted!');;
     }
 }

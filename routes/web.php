@@ -12,18 +12,6 @@
 */
 
 use Illuminate\Http\Request;
-
-Route::get('test', function () {
-    return view('sample');
-});
-Route::post('test/post', function (Request $request) {
-    return $request->test2;
-});
-
-Route::get('/', function () {
-    return redirect()->route('login');
-});
-
 Auth::routes();
 
 Route::prefix('admin')->group(function(){
@@ -65,15 +53,17 @@ Route::group(['middleware' => 'auth:admin'], function(){
         Route::delete('/examinee/delete/{id}','ExamineeController@deleteExaminee')->name('delete.examinee');
         Route::get('/examinee/profile/{id}','ExamineeController@examineeProfile')->name('examinee.profile');
 
-        Route::resource('/manage/departments','DepartmentsController');
-        Route::resource('/manage/courses','CoursesController');
+        Route::resource('manage/colleges','DepartmentsController');
+        Route::resource('manage/programs','CoursesController');
         Route::post('/manage/courses/data','CoursesController@coursesData')->name('course.data');
 
         Route::resource('/settings/school-year','SchoolYearController');
         Route::post('/settings/school-year/close/{school_year}','SchoolYearController@schoolyearClose')->name('schoolyear.close');
         Route::post('/settings/school-year/data','SchoolYearController@schoolyearData')->name('schoolyear.data');
 
-    
+        Route::get('settings/account','Auth\AdminAccountSettingController@editAccount')->name('admin.edit.account');
+        Route::post('settings/account/profile/update','Auth\AdminAccountSettingController@updateProfile')->name('admin.update.profile');
+        Route::post('settings/account/password/change','Auth\AdminAccountSettingController@changePassword')->name('admin.change.password');
     });
 });
 

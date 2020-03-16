@@ -25,12 +25,12 @@ class ExamineeRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'          =>          ['required', 'string', 'max:255','unique:tbl_examinees'],
+            'name'          =>          ['required', 'string', 'max:255','unique:tbl_examinees,name'],
             'address'       =>          ['required'],
             'gender'        =>          ['required'],
             'birthdate'     =>          ['required','date'],
             'cellnumber'    =>          ['required', new PhoneNumberRule],
-            'email'         =>          ['required', 'string', 'email', 'max:255', 'unique:tbl_examinees'],
+            'email'         =>          ['required', 'sometimes','string', 'email', 'max:255','unique:tbl_examinees,email'],
             'password'      =>          ['required', 'string', 'min:8'],
         ];
     }

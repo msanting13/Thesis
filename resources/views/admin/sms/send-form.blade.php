@@ -1,14 +1,3 @@
-@extends('layout.layout-master')
-@section('title','Send Message')
-@section('breadcrumb')
-<h3 class="text-themecolor m-b-0 m-t-0">Category</h3>
-<ol class="breadcrumb">
-	<li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-	<li class="breadcrumb-item active">Message</li>
-	<li class="breadcrumb-item active">Send</li>
-</ol>
-@endsection
-@section('content')
 <div class="row">
 	<div class="col-12">
 		<div class="card">
@@ -30,7 +19,7 @@
 		<div class="card">
 			<div class="card-block">
 				
-				<form method="POST">
+				<form action="{{ route('sms.test') }}" method="POST">
 					@csrf
 					<div class="form-group">
 						<label for="phone">Phone Number</label>
@@ -44,9 +33,7 @@
 						<input type="submit" value="Send" class="btn btn-primary">
 					</div>
 				</form>
-				@include('template.modal')
 			</div>
 		</div>
 	</div>
 </div>
-@endsection

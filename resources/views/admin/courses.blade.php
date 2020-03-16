@@ -1,11 +1,11 @@
 @extends('layout.layout-master')
 @section('title','Courses')
 @section('breadcrumb')
-	<h3 class="text-themecolor m-b-0 m-t-0">Courses</h3>
+	<h3 class="text-themecolor m-b-0 m-t-0">Programs</h3>
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
 		<li class="breadcrumb-item active">Manage</li>
-		<li class="breadcrumb-item active">Courses</li>
+		<li class="breadcrumb-item active">Programs</li>
 	</ol>
 @endsection
 @section('content')
@@ -14,8 +14,9 @@
 			<div class="card">
 				<div class="card-block">
 					@include('errors.error')
+					@include('template.success')
 					<h3>
-						Courses
+						Programs
 						<a class="btn btn-circle btn-outline-primary btn-sm pull-right" data-toggle="modal" href='#modal-id'>
 							<i class="fa fa-plus"></i>
 						</a>   
@@ -33,9 +34,9 @@
 							<thead>
 								<tr>
 									<th>ID #</th>
-									<th>Department</th>
-									<th>Course code</th>
-									<th>Course description</th>
+									<th>College</th>
+									<th>Program code</th>
+									<th>Program</th>
 									<th>Updated at</th>
 									<th>Action</th>
 								</tr>
@@ -49,13 +50,13 @@
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-									<h4 class="modal-title">Add Course</h4>
+									<h4 class="modal-title">Add Program</h4>
 								</div>
 								<div class="modal-body">
 									<form action="{{ action('CoursesController@store') }}" method="POST" role="form">
 										@csrf
 										<div class="form-group">
-											<label for="department">Department</label>
+											<label for="department">College</label>
 											<select id="department" class="form-control" name="department">
 												@foreach($departments as $department)
 													<option value="{{ $department->id }}">{{ $department->department_name }}</option>
@@ -63,11 +64,11 @@
 											</select>
 										</div>
 										<div class="form-group">
-											<label for="courseCode">Course code</label>
+											<label for="courseCode">Program code</label>
 											<input type="text" class="form-control" id="courseCode" value="{{ old('course_code') }}" name="course_code">
 										</div>
 										<div class="form-group">
-											<label for="courseDescription">Course description</label>
+											<label for="courseDescription">Program</label>
 											<input type="text" class="form-control" id="courseDescription" value="{{ old('course_descr') }}" name="course_descr">
 										</div>
 										<div class="form-group">

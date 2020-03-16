@@ -14,9 +14,9 @@ class AdminTableSeeder extends Seeder
     {
         $admin = new Admin();
         $admin->name = 'Admin';
-        $admin->email = 'admin@admin.me';
+        $admin->email = 'admin@gmail.com';
         $admin->position = 'Guidance Councelor';
-        $admin->password = Hash::make('p4ssword');
+        $admin->password = Hash::make('password');
         $admin->save();
     }
 }

@@ -16,7 +16,7 @@
       $('#modal-loader').show();      // load ajax loader
 
       $.ajax({
-        url: '/admin/manage/courses/'+id+'/edit',
+        url: '/admin/manage/programs/'+id+'/edit',
         type: 'GET',
         dataType: 'html'
       })

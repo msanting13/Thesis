@@ -1,11 +1,11 @@
 @extends('layout.layout-master')
-@section('title','Departments')
+@section('title','Colleges')
 @section('breadcrumb')
-	<h3 class="text-themecolor m-b-0 m-t-0">Departments</h3>
+	<h3 class="text-themecolor m-b-0 m-t-0">Colleges</h3>
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
 		<li class="breadcrumb-item active">Manage</li>
-		<li class="breadcrumb-item active">Departments</li>
+		<li class="breadcrumb-item active">Colleges</li>
 	</ol>
 @endsection
 @section('content')
@@ -14,8 +14,9 @@
 			<div class="card">
 				<div class="card-block">
 					@include('errors.error')
+					@include('template.success')
 					<h3>
-						Departments
+						Colleges
 						<a class="btn btn-circle btn-outline-primary btn-sm pull-right" data-toggle="modal" href='#modal-id'>
 							<i class="fa fa-plus"></i>
 						</a>   
@@ -33,7 +34,7 @@
 							<thead>
 								<tr>
 									<th>ID #</th>
-									<th>Department name</th>
+									<th>College</th>
 									<th>Date modified</th>
 									<th>Action</th>
 								</tr>
@@ -66,14 +67,14 @@
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-									<h4 class="modal-title">Add Department</h4>
+									<h4 class="modal-title">Add College</h4>
 								</div>
 								<div class="modal-body">
 									<form action="{{ action('DepartmentsController@store') }}" method="POST" role="form">
 										@csrf
 										<div class="form-group">
-											<label for="Name">Department name</label>
-											<input type="text" class="form-control" id="departmentName" name="department_name" value="{{ old('department_name') }}" placeholder="Department name">
+											<label for="Name">College</label>
+											<input type="text" class="form-control" id="departmentName" name="department_name" value="{{ old('department_name') }}" placeholder="College">
 										</div>
 										<div class="form-group">
 											<button type="submit" class="btn waves-effect waves-light btn-rounded btn-outline-primary">Save</button>

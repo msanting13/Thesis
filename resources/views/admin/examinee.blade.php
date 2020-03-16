@@ -14,6 +14,7 @@
 			<div class="card">
 				<div class="card-block">
 					@include('errors.error')
+					@include('template.success')
 					<h3>
 						Add Examinee
 						<a class="btn btn-circle btn-outline-primary btn-sm pull-right" data-toggle="modal" href='#modal-id'>

@@ -15,19 +15,19 @@
                             <ul aria-expanded="false" class="collapse">
                                 <li>
                                     <a href="{{ route('category') }}">
-                                        Category
+                                        Categories
                                     </a>    
                                     <a href="{{ route('questionnaire') }}" class="@yield('status')">
                                         Questionnaire
                                     </a>    
                                     <a href="{{ route('examinee') }}">
-                                        Examinee
+                                        Examinees
                                     </a>    
                                     <a href="{{ action('DepartmentsController@index') }}">
-                                        Departments
+                                        Colleges
                                     </a>
                                     <a href="{{ action('CoursesController@index') }}">
-                                        Courses
+                                        Programs
                                     </a>      
                                 </li>
                             </ul>
@@ -42,11 +42,11 @@
                             </a>
                             <ul aria-expanded="false" class="collapse">
                                 <li>
-                                    <a href="#">
-                                        Account Setting
+                                    <a href="{{ route('admin.edit.account') }}">
+                                        Account
                                     </a>    
                                     <a href="{{ url('/admin/settings/school-year') }}" class="@yield('status')">
-                                        School-Year Setting
+                                        School-Year
                                     </a>      
                                 </li>
                             </ul>
@@ -59,10 +59,10 @@
             <!-- Bottom points-->
             <div class="sidebar-footer" style="background: #1d2531">
                 <!-- item-->
-                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a> 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>       
+                <a href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a> 
+                <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>       
             </div>
             <!-- End Bottom points-->
         </aside>
