@@ -29,10 +29,15 @@ class HomeController extends Controller
                             ->get()
                             ->groupBy('type.code');
 
-        // Shuffle each Question group.
-        $multipleChoice = $questions['MC']->shuffle();
-        $fillInTheBlank = $questions['FITB']->shuffle();
-        $identification = $questions['I']->shuffle();
+        if (!empty($questions['MC'])) {
+            $multipleChoice = $questions['MC']->shuffle();
+        }
+        if (!empty($questions['FITB'])) {
+            $fillInTheBlank = $questions['FITB']->shuffle();
+        }
+        if (!empty($questions['I'])) {
+            $identification = $questions['I']->shuffle();
+        }
 
         $noOfQuestions  = Question::count();
         return view('home', compact('noOfQuestions', 'multipleChoice', 'fillInTheBlank', 'identification'));

@@ -9,11 +9,8 @@
 @endsection
 @section('content')
 	<div class="row">
-		<div class="col-12">
-			<div class="card">
-				<div class="card-block">
-				</div>
-			</div>
+		<div class="col-md-12" style="text-align: center;">
+			<img src="/assets/images/67794854_2178648335729029_448519625085288448_n.png" class="img img-responsive" style="width: 400px;">
 		</div>
 	</div>
 @endsection

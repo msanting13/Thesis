@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     public function __construct() 
     {
-        $this->middleware('password.confirm',['only' => ['deleteCategory']]);
+        // $this->middleware('password.confirm',['only' => ['deleteCategory']]);
     }
     public function index()
     {
@@ -41,8 +41,7 @@ class CategoryController extends Controller
     public function deleteCategory($id)
     {
         $category = Category::find($id);
-        echo "test";
-        // $category->delete();
-        // return redirect()->back()->with('success','Successfully deleted');  
+        $category->delete();
+        return redirect()->back()->with('success','Successfully deleted');  
     }
 }

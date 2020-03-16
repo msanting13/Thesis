@@ -8,6 +8,7 @@
             <div><h5 id="noOfQuestions">No. of Questions : {{ $noOfQuestions }}</h5></div>
         </div>
     </div>
+    @isset($multipleChoice)
     @foreach($multipleChoice as $question)
      <div class="row" id="{{ uniqid() }}">
          <div class="col-md-12">
@@ -42,7 +43,9 @@
          </div>
      </div>
  @endforeach
+ @endisset
 
+ @isset($fillInTheBlank)
  @foreach($fillInTheBlank as $question)
      <div class="row" id="{{ uniqid() }}">
         <div class="col-md-12">
@@ -60,7 +63,9 @@
         </div>
     </div>
 @endforeach 
+@endisset
 
+@isset($identification)
 @foreach($identification as $question)
      <div class="row" id="{{ uniqid() }}">
         <div class="col-md-12">
@@ -78,4 +83,5 @@
         </div>
     </div>
 @endforeach
+@endisset
 @endsection

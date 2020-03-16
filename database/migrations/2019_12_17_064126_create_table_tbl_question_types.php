@@ -17,7 +17,7 @@ class CreateTableTblQuestionTypes extends Migration
             $table->bigIncrements('id');
             $table->string('code');
             $table->string('name');
-            $table->string('instruction');
+            $table->string('instruction')->nullable();
             $table->timestamps();
         });
     }
