@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         // Questions must be group by type
-        $questions = Question::with(['categories:id,name', 'type:id,code,name'])
+        $questions = Question::with(['categories:id,name', 'type:id,code,name,instruction'])
                             ->get()
                             ->groupBy('type.code');
 
@@ -39,6 +39,7 @@ class HomeController extends Controller
             $identification = $questions['I']->shuffle();
         }
 
+        
         $noOfQuestions  = Question::count();
         return view('home', compact('noOfQuestions', 'multipleChoice', 'fillInTheBlank', 'identification'));
     }

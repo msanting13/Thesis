@@ -5,7 +5,7 @@
       }
     }); 
 
-    $(document).on('click', '.edit-question', function(a){
+    $(document).on('click', '.edit-questiontype', function(a){
 
       a.preventDefault();
 
@@ -18,9 +18,8 @@
       $('#modal-loader').show();      // load ajax loader
 
       $.ajax({
-        url: '/admin/question/edit',
+        url: '/admin/manage/question-type/'+id+'/edit',
         type: 'GET',
-        data: 'id='+id,
         dataType: 'html'
       })
       .done(function(data){

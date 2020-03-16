@@ -45,6 +45,11 @@ Route::group(['middleware' => 'auth:admin'], function(){
         //Delete Questions
         Route::delete('/question/delete/{id}','QuestionnaireController@deleteQuestion')->name('delete.question');
 
+        //QuestionTypes
+        Route::get('manage/question-type','QuestionTypeController@index')->name('question-type.index');
+        Route::get('manage/question-type/{id}/edit','QuestionTypeController@edit')->name('question-type.edit');
+        Route::patch('manage/question-type/{id}','QuestionTypeController@update')->name('question-type.update');
+
         //Examinee
         Route::get('/manage/examinee','ExamineeController@index')->name('examinee');
         Route::post('/manage/examinee/data','ExamineeController@examineeData')->name('examinee.data');

@@ -16,7 +16,7 @@
                         <!-- Logo text -->
                         <span style="color:#fff;">
                          <!-- Light Logo text -->    
-                         SDSSUAEEv.1.1  
+                         SDSSUAEESv.1.1  
                         </span> 
                     </a>
                 </div>
@@ -33,7 +33,7 @@
                         <!-- ============================================================== -->
                         <li class="nav-item hidden-sm-down app-header"> 
                             <a class="nav-link hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)">
-                                SDSSU Automated Entrance Examination w/ SMS Notification
+                                SDSSU Automated Entrance Examination System w/ SMS Notification
                             </a>
                         </li>
                     </ul>

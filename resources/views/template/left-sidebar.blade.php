@@ -19,6 +19,9 @@
                                     </a>    
                                     <a href="{{ route('questionnaire') }}" class="@yield('status')">
                                         Questionnaire
+                                    </a>                                        
+                                    <a href="{{ route('question-type.index') }}">
+                                        Question Types
                                     </a>    
                                     <a href="{{ route('examinee') }}">
                                         Examinees
