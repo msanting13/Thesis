@@ -310,11 +310,11 @@
                     if (noOfQuestions != (noOfAnsweredQuestions)) {
                         swal ('Oops','Please double check all questions maybe you missed some questions.',  'error')
                     } else {
-                        swal({
+                        /*swal({
                           title: 'Result',
                           icon : 'success',
                           text : `Correct Answers : ${correct.length} & Wrong Answers ${wrong.length}`
-                        });
+                        });*/
                         // Process of text message.
                         sendSMSmessageToExaminee(correct, wrong);
                     }

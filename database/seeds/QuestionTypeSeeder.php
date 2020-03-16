@@ -17,7 +17,7 @@ class QuestionTypeSeeder extends Seeder
     		QuestionType::create([
                 // Creating abbrevation for type name.
                 'code' => strtoupper(preg_replace('/\b(\w)|./', '$1', $type)),
-        		'name' => $type
+        		'name' => $type 
         	]);
     	}
     }

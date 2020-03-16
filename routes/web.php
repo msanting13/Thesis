@@ -22,6 +22,7 @@ Route::prefix('admin')->group(function(){
 
 Route::group(['middleware' => 'auth:admin'], function(){
     Route::prefix('admin')->group(function(){
+        Route::get('/examinee/result/sample', 'ExamineeResultController@index');
         Route::get('/dashboard', 'AdminDashboardController@index')->name('admin.dashboard');
 
         //Category
