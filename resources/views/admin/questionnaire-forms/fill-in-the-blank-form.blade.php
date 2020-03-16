@@ -26,7 +26,7 @@
 				<div class="card-block">
 					<div class="form-group">
 						<label for="category">Category</label>
-						<select class="form-control" name="category" required>
+						<select class="form-control" id="questionCategory" name="category" required>
 							<option></option>
 							@foreach($categories as $category)
 								<option value="{{ $category->id }}">{{ $category->name }}</option>

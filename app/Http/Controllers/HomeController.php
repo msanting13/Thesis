@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Question;
+use App\QuestionType;
 
 class HomeController extends Controller
 {
@@ -17,6 +18,7 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
+
     /**
      * Show the application dashboard.
      *
@@ -24,23 +26,31 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $questionVariables = [];
         // Questions must be group by type
         $questions = Question::with(['categories:id,name', 'type:id,code,name,instruction'])
                             ->get()
                             ->groupBy('type.code');
 
-        if (!empty($questions['MC'])) {
-            $multipleChoice = $questions['MC']->shuffle();
-        }
-        if (!empty($questions['FITB'])) {
-            $fillInTheBlank = $questions['FITB']->shuffle();
-        }
-        if (!empty($questions['I'])) {
-            $identification = $questions['I']->shuffle();
-        }
+        $q = $questions;
 
-        
+        if ($q->has(QuestionType::MULTIPLE_CHOICE)) {
+            $multipleChoice = $questions['MC']->shuffle();
+            $questionVariables[] = 'multipleChoice';
+        } 
+
+        if ($q->has(QuestionType::FILL_IN_THE_BLANK)) {
+            $fillInTheBlank = $questions['FITB']->shuffle();
+            $questionVariables[] = 'fillInTheBlank';
+        } 
+
+        if ($q->has(QuestionType::IDENTIFICATION)) {
+            $identification = $questions['I']->shuffle();
+            $questionVariables[] = 'identification';
+        } 
+
         $noOfQuestions  = Question::count();
-        return view('home', compact('noOfQuestions', 'multipleChoice', 'fillInTheBlank', 'identification'));
+        
+        return view('home', compact($questionVariables, 'noOfQuestions'));
     }
 }

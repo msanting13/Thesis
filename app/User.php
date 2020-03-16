@@ -48,6 +48,11 @@ class User extends Authenticatable
         return $this->hasOne('App\PreferredCourse','examinee_id');
     }
 
+    public function examResult()
+    {
+        return $this->hasOne('App\ExamineeResult','examinee_id');
+    }
+
     public static function boot()
     {
         parent::boot();
