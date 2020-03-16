@@ -1,0 +1,24 @@
+Bachelor of Arts in Economics|BA-Econ|College of Arts and Sciences
+Bachelor of Arts in English|BA-Eng|College of Arts and Sciences
+Bachelor of Arts in Filipino|BA-Fil|College of Arts and Sciences
+Bachelor of Arts in Political Science|BA-PolSci|College of Arts and Sciences
+Bachelor of Arts in Public Administration|BA-PubAD|College of Arts and Sciences
+Bachelor of Arts in Social Science| BASS|College of Arts and Sciences
+Bachelor of Science in Biology|BS-Bio|College of Arts and Sciences
+Bachelor of Science in Environmental Science|BS-EnviSci|College of Arts and Sciences
+Diploma in Midwifery| DIM|College of Arts and Sciences
+
+Bachelor of Science in Business Administration major in Financial Management|BSBAFM|College of Business Management
+Bachelor of Science in Business Administration major in Human Resource Management|BSBA-HRM|College of Business Management
+Bachelor of Science in Business Administration major in Marketing Management|BSBAMM|College of Business Management
+Bachelor of Science in Hospitality Management|BSHM|College of Business Management
+
+Bachelor of Science in Civil Engineering|BSCE|College of Engineering, Computer Studies and Technology
+Bachelor of Science in Computer Science|BSCS|College of Engineering, Computer Studies and Technology
+
+Bachelor of Early Childhood Education| BECE|College of Teacher Education
+Bachelor of Physical Education|BPED|College of Teacher Education
+Bachelor of Secondary Education major in English|BSED-English|College of Teacher Education
+Bachelor of Secondary Education major in Filipino|BSED-Filipino|College of Teacher Education
+Bachelor of Secondary Education major in Science|BSED-Science|College of Teacher Education
+Diploma in Teaching| DIT|College of Teacher Education
