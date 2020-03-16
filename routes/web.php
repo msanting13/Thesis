@@ -58,6 +58,7 @@ Route::group(['middleware' => 'auth:admin'], function(){
         Route::patch('/examinee/update/{id}','ExamineeController@updateExaminee')->name('update.examinee');
         Route::delete('/examinee/delete/{id}','ExamineeController@deleteExaminee')->name('delete.examinee');
         Route::get('/examinee/profile/{id}','ExamineeController@examineeProfile')->name('examinee.profile');
+        Route::get('/examinee/result/{examinee}', 'ExamineeResultController@show')->name('examinee.result');
 
         Route::resource('manage/colleges','DepartmentsController');
         Route::resource('manage/programs','CoursesController');
