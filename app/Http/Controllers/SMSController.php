@@ -7,14 +7,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Category;
 use GuzzleHttp\Client;
+use App\Http\Repository\ExamineeResultRepository;
 
 
 class SMSController extends Controller
 {
     private $client;
-    public function __construct()
+    public function __construct(ExamineeResultRepository $examineeRepo)
     {
         $this->client = new Client();
+        $this->examineeRepo = $examineeRepo;
     }
     /**
      * Display the send form of the SMS function
@@ -22,18 +24,6 @@ class SMSController extends Controller
     public function sendForm()
     {
         return view('admin.sms.send-form');
-    }
-
-    
-    public function processCorrectByQuestionType(array $correct) :array
-    {
-        $correctValues = [];
-        foreach (array_keys($correct) as $value)  {
-            // Changing the keys of an array into column name of tbl_examinee_result
-            $values[] = str_replace(' ', '_', rtrim(substr(strtolower($value), 0, -1), '_'));
-        }
-        
-        return array_count_values($values);    
     }
     
 
@@ -46,9 +36,8 @@ class SMSController extends Controller
     public function send(Request $request)
     {
         Auth::user()->examResult()->update(
-            $this->processCorrectByQuestionType($request->type_correct)
+            $this->examineeRepo->processCorrectByQuestionType($request->type_correct)
         );
-
         
 
         // Get the phone number of examinee
