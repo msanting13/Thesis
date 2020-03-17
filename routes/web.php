@@ -11,7 +11,6 @@
 |
 */
 
-use Illuminate\Http\Request;
 Auth::routes();
 
 Route::prefix('admin')->group(function(){
