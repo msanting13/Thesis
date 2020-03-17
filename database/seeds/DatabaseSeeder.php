@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             QuestionTypeSeeder::class,
             QuestionSeeder::class,
             AdminTableSeeder::class,
-            ExamineeSeeder::class,
+            //ExamineeSeeder::class,
             SchoolYearSeeder::class,
         ]);
     }
