@@ -12,7 +12,7 @@ class CategoryTableSeeder extends Seeder
      */
     public function run()
     {
-        $categories = ['Quantitative Reasoning','Quantitative Reasoning','Verbal Reasoning','Verbal Comprehension'];
+        $categories = ['Quantitative Reasoning','Figurative Reasoning','Verbal Reasoning','Verbal Comprehension'];
         foreach ($categories as $key => $category) 
         {
         	$categoryModel = new Category();

@@ -1,5 +1,10 @@
+
 <form action="{{ route('delete.examinee',$id) }}" method="POST">
 	@csrf
+	<a class="btn btn-circle btn-outline-info btn-sm" href="{{ route('examinee.result',$id) }}">
+		<i class="fa fa-print"></i>
+	</a>	
+
 	<a class="btn btn-circle btn-outline-info btn-sm" href="{{ route('examinee.profile',$id) }}">
 		<i class="fa fa-user"></i>
 	</a>	

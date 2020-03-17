@@ -127,6 +127,10 @@
         const bcrypt = dcodeIO.bcrypt;
         let correct  = [];
         let wrong    = [];
+
+        let correctByType = {};
+        let wrongByType = {};
+
         let fillInTheBlankAnswers = [];
         let submitCount = 0;
 
@@ -162,7 +166,7 @@
             $.ajax({
                 url: '/message/send',
                 type: 'POST',
-                data: {examinee_id : {{Auth::user()->id}} , correct : correct, wrong: wrong},
+                data: {examinee_id : {{Auth::user()->id}} , correct : correct.length, wrong: wrong.length, type_correct : correctByType},
                 success : function (response) {
                     console.log(response);
                 }
@@ -177,10 +181,13 @@
         // Function for checking if answer is correct/wrong in multiple choice
         document.body.addEventListener('click', (e) => {
             if (isMultipleChoice(e)) {
-                let questionId = e.target.getAttribute('data-id');
-                let key = e.target.getAttribute('data-key');
+                let questionId     = e.target.getAttribute('data-id');
+                let key            = e.target.getAttribute('data-key');
+                let category        = e.target.getAttribute('data-category');
                 let selectedChoice = e.target.value.toUpperCase();
-                let question = document.querySelector(`#question-${questionId}`).innerHTML;
+                let question       = document.querySelector(`#question-${questionId}`).innerHTML;
+
+
                 if (key.includes(calcMD5(question.substr(0,11).trim()))) {
                     let md5Index = key.indexOf(calcMD5(question.substr(0,11).trim()));
                     key = key.slice(0, md5Index);
@@ -193,9 +200,11 @@
                         isExamineeAlreadyAnswer(questionId);
                         isExamineeAlreadyAnswer(questionId);
                         correct.push(questionId);
+                        correctByType[`${category}_${questionId}`] = 1;
                     } else {
                         isExamineeAlreadyAnswer(questionId);
                         isExamineeAlreadyAnswer(questionId);
+                        wrongByType[`${category}_${questionId}`] = 0;
                         wrong.push(questionId);
                     }
                 });
@@ -207,6 +216,7 @@
             if (isIdentification(e)) {
                 let questionId = e.target.getAttribute('data-id');
                 let key = e.target.getAttribute('data-key');
+                let category = e.target.getAttribute('data-category');
                 let answer = e.target.value.toUpperCase();
                 let question = document.querySelector(`#question-text-${questionId}`).innerHTML;
                 if (key.includes(calcMD5(question.substr(0,11).trim()))) {
@@ -221,18 +231,21 @@
                         isExamineeAlreadyAnswer(questionId);
                         isExamineeAlreadyAnswer(questionId);
                         correct.push(questionId);
+                        correctByType[`${category}_${questionId}`] = 1;
                     } else {
                         isExamineeAlreadyAnswer(questionId);
                         isExamineeAlreadyAnswer(questionId);
                         wrong.push(questionId);
+                        wrongByType[`${category}_${questionId}`] = 0;
                     }
                 });
             }
         });
 
         // This function is for Fill in the blank.
-        let verify = (encodedAnswer, examineeAnswer, questionId) => {
+        let verify = (element, encodedAnswer, examineeAnswer, questionId) => {
             let SEPERATOR_CODE = "0x20";
+            let category = element.getAttribute('data-category');
             // We need to check if the decodedAnswer is only one character or more than
             if (encodedAnswer.includes(SEPERATOR_CODE)) {
                 // We need to split it by seperator code
@@ -247,9 +260,11 @@
                     isExamineeAlreadyAnswer(questionId);
                     isExamineeAlreadyAnswer(questionId);
                     correct.push(questionId);
+                    correctByType[`${category}_${questionId}`] = 1;
                 } else {
                     isExamineeAlreadyAnswer(questionId);
                     isExamineeAlreadyAnswer(questionId);
+                    wrongByType[`${category}_${questionId}`] = 0;
                     wrong.push(questionId);
                 }
             } else { // We just need to decode the ascii value of the encodedAnswer.
@@ -259,10 +274,12 @@
                     // Count as correct
                     isExamineeAlreadyAnswer(questionId);
                     isExamineeAlreadyAnswer(questionId);
+                    correctByType[`${category}_${questionId}`] = 1;
                     correct.push(questionId);
                 } else {
                     isExamineeAlreadyAnswer(questionId);
                     isExamineeAlreadyAnswer(questionId);
+                    wrongByType[`${category}_${questionId}`] = 0;
                     wrong.push(questionId);
                 }
             }
@@ -287,7 +304,7 @@
                     if (element instanceof HTMLInputElement && element.type == 'text') {
                         if (element == e.target) { // Element inside of parent is equal to examinee selected input
                             // Verify the answer
-                            verify(answerKeys[position], e.target.value.toLowerCase(), questionId);
+                            verify(element, answerKeys[position], e.target.value.toLowerCase(), questionId);
                         }
                         position++;
                     }
@@ -310,6 +327,8 @@
                     if (noOfQuestions != (noOfAnsweredQuestions)) {
                         swal ('Oops','Please double check all questions maybe you missed some questions.',  'error')
                     } else {
+                        console.log(correctByType, wrongByType);
+                        // console.log(wrongByType);
                         /*swal({
                           title: 'Result',
                           icon : 'success',

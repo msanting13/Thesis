@@ -2,11 +2,28 @@ let btnAddBlankField = document.querySelector('#addBlankField-btn');
 let questionnaireEditorElement = document.querySelector('#questionnaireEditor');
 let btnAddAnswersKeyFields = document.querySelector('#addAnswersKeyFields-btn');
 
+let questionCategory = document.querySelector('#questionCategory');
+
+
+
 
 questionnaireEditorElement.addEventListener("input", syncQuestionnaireEditorContainer);
 btnAddBlankField.addEventListener("click", addBlankField);
 btnAddBlankField.addEventListener("click", syncQuestionnaireEditorContainer);
 btnAddAnswersKeyFields.addEventListener("click", answersKeyFields);
+
+// This event is incase that the user choose to select an category after entering the question details
+questionCategory.addEventListener('change',  (e) => {
+    let selectedCategory = questionCategory[questionCategory.selectedIndex].text;
+    questionnaireEditorElement.childNodes.forEach((element, length) => {
+        if (element instanceof HTMLInputElement && element.type == 'text') {
+            element.setAttribute('data-category', selectedCategory);    
+        }
+    });
+
+});
+
+
 
 let ID = function () {
   // Math.random should be unique because of its seeding algorithm.
@@ -15,6 +32,7 @@ let ID = function () {
   return '_' + Math.random().toString(36).substr(2, 9);
 };
 
+// data-category to add the category type of question
 function addBlankField() {
     let blankField = document.createElement("input");
     setAttributes(blankField, {
@@ -22,7 +40,8 @@ function addBlankField() {
         "name": "fillInTheBlankField[]",
         "id" : `FITB-${ID()}`,
         "data-type" : "fillIn",
-        "class": "fillInTheBlankField form-control col-md-3"
+        "class": "fillInTheBlankField form-control col-md-3",
+        "data-category" : questionCategory[questionCategory.selectedIndex].text,
     });
 
     questionnaireEditorElement.appendChild(blankField)
@@ -60,6 +79,7 @@ function answersKeyFields() {
         }
     }
 }
+
 function removeAnswersKeyFields(rid) {
     $('.removeclass' + rid).remove();
 }

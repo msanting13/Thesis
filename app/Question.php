@@ -11,6 +11,8 @@ class Question extends Model
 {
     protected $table = 'tbl_questions';
     protected $fillable = ['content','answers_key','type_id'];
+    
+    
     //protected $appends = ['answers_key'];
     /**
      * Set the answer key and encrpyt.
@@ -22,6 +24,7 @@ class Question extends Model
     {
         return Hash::make($this->answers_key);
     }
+
     public function categories()
     {
     	return $this->belongsTo('App\Category','category_id');

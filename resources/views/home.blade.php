@@ -35,7 +35,7 @@
                             
                                      <tr>
                                          <th style="width: 2px;">
-                                             <input name="group5" type="radio" id="{{ $question->id }}radio_{{ $choice->key }}" data-id="{{ $question->id }}" data-key="{{$question->answers_key}}{{md5(trim(substr($question->content, 0,10)))}}" value="{{ $choice->key }}" class="with-gap radio-col-deep-purple">
+                                             <input name="group5" type="radio" id="{{ $question->id }}radio_{{ $choice->key }}" data-id="{{ $question->id }}" data-key="{{$question->answers_key}}{{md5(trim(substr($question->content, 0,10)))}}" data-category="{{ $question->categories->name }}" value="{{ $choice->key }}" class="with-gap radio-col-deep-purple">
                                              <label for="{{ $question->id }}radio_{{ $choice->key }}">{{ $choice->key }}</label>
                                          </th>
                                          <td>
@@ -100,7 +100,7 @@
                     <hr>
                     <h4 class="row">
                         <div class="col-md-12" id="question-text-{{$question->id}}"> {!! $question->content !!}</div>
-                        <input type="text" id="{{ $question->id }}text_{{ $choice->key }}" data-id="{{ $question->id }}" data-key="{{$question->answers_key}}{{md5(trim(substr($question->content, 0,10)))}}" data-type="identification" placeholder="Enter your answer here..." class="with-gap form-control">
+                        <input type="text" id="{{ $question->id }}text_{{ $choice->key }}" data-id="{{ $question->id }}" data-key="{{$question->answers_key}}{{md5(trim(substr($question->content, 0,10)))}}" data-category="{{ $question->categories->name }}" data-type="identification" placeholder="Enter your answer here..." class="with-gap form-control">
                     </h4>
                 </div>
             </div>
