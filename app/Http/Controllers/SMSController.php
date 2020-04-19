@@ -46,16 +46,18 @@ class SMSController extends Controller
 
         $appellation = Auth::user()->gender === 'male' ? 'Mr.' : 'Ms.';
         
+        // Credentials need for authenticating in SDGateway
+        $credentials = ['Authorization' => 'bearer' . ' ' . config('sms.token')];
 
         // Prepare a message
         $messageData = [
             'phone_number' => $userPhoneNumber,
             'message' => "Hello " . $appellation . Auth::user()->name . " here's your score in SDSSU Entrance Examination \nCorrect: ".$request->correct."\nWrong: ". $request->wrong . "\nPlease don't reply to this message.",
-            'device_id' => 1
+            'device_id' => config('sms.device_id')
         ];
 
         $this->client
-            ->request('POST', 'https://sdgateway.herokuapp.com/api/device/send/message', ['form_params' => $messageData]);
+            ->request('POST', 'https://sdgateway.herokuapp.com/api/device/send/message', ['headers' => $credentials, 'form_params' => $messageData]);
 
         return response()->json(['success' => true]);
     }
