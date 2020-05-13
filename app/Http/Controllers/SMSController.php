@@ -35,6 +35,8 @@ class SMSController extends Controller
      */
     public function send(Request $request)
     {
+        $request->type_correct ?? [];
+        
         Auth::user()->examResult()->updateOrCreate(
             $this->examineeRepo->processCorrectByQuestionType($request->type_correct)
         );
