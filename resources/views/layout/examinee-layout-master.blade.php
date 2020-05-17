@@ -329,11 +329,11 @@
                     } else {
                         console.log(correctByType, wrongByType);
                         // console.log(wrongByType);
-                        /*swal({
+                        swal({
                           title: 'Result',
                           icon : 'success',
-                          text : `Correct Answers : ${correct.length} & Wrong Answers ${wrong.length}`
-                        });*/
+                          text : `Success!`
+                        });
                         // Process of text message.
                         sendSMSmessageToExaminee(correct, wrong);
                     }
