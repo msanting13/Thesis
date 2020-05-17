@@ -168,7 +168,13 @@
                 type: 'POST',
                 data: {examinee_id : {{Auth::user()->id}} , correct : correct.length, wrong: wrong.length, type_correct : correctByType},
                 success : function (response) {
-                    console.log(response);
+                    if (response.success) {
+                        swal({
+                          title: 'Result',
+                          icon : 'success',
+                          text : `Success!`
+                        });    
+                    }
                 }
             });
         };
@@ -329,11 +335,7 @@
                     } else {
                         console.log(correctByType, wrongByType);
                         // console.log(wrongByType);
-                        swal({
-                          title: 'Result',
-                          icon : 'success',
-                          text : `Success!`
-                        });
+                        
                         // Process of text message.
                         sendSMSmessageToExaminee(correct, wrong);
                     }
